@@ -1,5 +1,5 @@
 /**
- * Login For users to collect token and perform changes to their account
+ * Register For users to collect token and create an account
  */
 
 import React from 'react';
@@ -20,23 +20,35 @@ import Terms from '../components/Terms';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import ThirdPartyLogins from '../components/ThirdPartyLogins';
 
-interface LoginRequest {
+interface RegisterRequest {
+    email: string,
     username: string,
-    password: string
+    password: string,
+    passwordConfirm: string,
 }
 
-function makeLoginRequest({ username, password }: LoginRequest): void {
+function makeRegisterRequest({
+    email,
+    username,
+    password,
+    passwordConfirm
+}: RegisterRequest): void {
     // TODO
 }
 
-function LoginForm(): JSX.Element {
+function RegisterForm(): JSX.Element {
     return (
         <Formik
-            initialValues={{ username: '', password: '' } as LoginRequest}
-            onSubmit={makeLoginRequest}
+            initialValues={{ email: '', username: '', password: '', passwordConfirm: '' } as RegisterRequest}
+            onSubmit={makeRegisterRequest}
         >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <View>
+                    <TextInput
+                        onChangeText={handleChange('email')}
+                        onBlur={handleBlur('email')}
+                        value={values.email}
+                    />
                     <TextInput
                         onChangeText={handleChange('username')}
                         onBlur={handleBlur('username')}
@@ -47,6 +59,11 @@ function LoginForm(): JSX.Element {
                         onBlur={handleBlur('password')}
                         value={values.username}
                     />
+                    <TextInput
+                        onChangeText={handleChange('passwordConfirm')}
+                        onBlur={handleBlur('passwordConfirm')}
+                        value={values.username}
+                    />
                     <Button
                         onPress={
                             handleSubmit as (values:
@@ -54,7 +71,11 @@ function LoginForm(): JSX.Element {
                                 React.FormEvent<HTMLFormElement> |
                                 undefined) => void
                         }
-                        title="Login"
+                        title="Register"
+                    />
+                    <Button
+                        onPress={/* TODO Nav to screen Login */ (e) => { }}
+                        title="Cancel"
                     />
                     <ThirdPartyLogins onPress={() => { }} />
                     <Terms />
@@ -65,11 +86,11 @@ function LoginForm(): JSX.Element {
     );
 }
 
-export default function Login(): JSX.Element {
+export default function Register(): JSX.Element {
     return (
         <SafeAreaView>
             <Logo />
-            <LoginForm />
+            <RegisterForm />
         </SafeAreaView>
     )
 }
