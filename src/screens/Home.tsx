@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+import { ParamListBase } from '@react-navigation/core';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 import {
     SafeAreaView,
     ScrollView,
@@ -12,12 +14,13 @@ import {
 } from 'react-native';
 import TopBar from '../components/TopBar';
 import Config from '../components/Config';
+import { AppScreenProps } from '../navigator/NavigatorTypes';
 
-export default function Home(): JSX.Element {
+export default function Home({ navigation }: AppScreenProps): JSX.Element {
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar />
+            <TopBar OnButtonPress={() => navigation?.openDrawer()} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">
                 <Text>
