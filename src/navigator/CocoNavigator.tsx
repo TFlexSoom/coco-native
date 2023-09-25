@@ -10,6 +10,8 @@ import {
     useNavigationBuilder,
 } from '@react-navigation/native';
 import CocoRouter from './CocoRouter';
+import { Button, Text, View } from 'react-native';
+import NavigatorTerms from './NavigatorTerms';
 
 interface CocoNavigatorParams {
     initialScreen: string,
@@ -32,9 +34,13 @@ function CocoNavigator({
             children,
         });
 
+    // state => desired place that the navigator wants to be
+    // descriptors => constant information regarding each route
+
+    console.log("HERE!");
     return (
         <NavigationContent>
-            {/**  TODO */}
+            {descriptors[state.routeNames[state.index]].render()}
         </NavigationContent>
     );
 }

@@ -58,7 +58,7 @@ const cocoRouter: Router<NavigationState, CommonNavigationAction> = {
 
         return {
             stale: false,
-            type: 'drawer',
+            type: 'coco',
             key: shortid(),
             index:
                 typeof state.index === 'number' && state.index < routes.length

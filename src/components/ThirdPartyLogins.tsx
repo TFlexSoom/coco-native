@@ -25,21 +25,16 @@ function IconButton(props: any): JSX.Element {
 }
 
 export default function ThirdPartyLogins(props: any): JSX.Element {
-    const elems = [] as Array<JSX.Element>;
-
-    for (let party in ThirdParty) {
-        elems.push(
-            <IconButton
-                party={party}
-                title="Third Party Login"
-                {...props}
-            />
-        )
-    }
-
     return (
         <>
-            {elems}
+            {(Object.keys(ThirdParty) as Array<keyof typeof ThirdParty>).map(
+                (thirdParty, index) => <IconButton
+                    key={index}
+                    party={thirdParty}
+                    title="Third Party Login"
+                    {...props}
+                />
+            )}
         </>
     )
 }

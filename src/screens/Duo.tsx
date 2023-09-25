@@ -8,14 +8,18 @@ import {
     SafeAreaView,
     Image,
 } from 'react-native';
+import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ParamListBase } from '@react-navigation/native';
 
-function duoAuthenticate() {
+function duoAuthenticate(navigation: DrawerNavigationProp<ParamListBase>) {
     console.log("DUO AUTH HERE!");
+    navigation.navigate("Home")
 }
 
-export default function Duo(): JSX.Element {
+export default function Duo({ navigation }: AppScreenProps): JSX.Element {
 
-    useEffect(duoAuthenticate);
+    useEffect(duoAuthenticate.bind(null, navigation));
     return (
         <SafeAreaView>
             <Image source={{
