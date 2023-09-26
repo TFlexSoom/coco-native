@@ -35,7 +35,8 @@ function CocoNavigator({
         });
 
     // state => desired place that the navigator wants to be
-    // descriptors => constant information regarding each route
+    // descriptors => constant information regarding each 
+    // descriptors[state.routeNames[SOME_INDEX]].option
 
     console.log("HERE!");
     return (

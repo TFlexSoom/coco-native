@@ -4,17 +4,27 @@
 
 import React from 'react';
 import {
+    Button,
     SafeAreaView,
     ScrollView,
     StatusBar,
+    Text,
 } from 'react-native';
+import TopBar from '../components/TopBar';
+import { AppScreenProps } from '../navigator/NavigatorTypes';
 
-export default function ComingSoon(): JSX.Element {
+export default function ComingSoon({ navigation }: AppScreenProps): JSX.Element {
     return (
         <SafeAreaView>
             <StatusBar />
+            <TopBar onButtonPress={() => navigation?.openDrawer()} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">
+                <Text> Coming Soon </Text>
+                <Button
+                    title="Get Alerts"
+                    onPress={() => { }}
+                />
             </ScrollView>
         </SafeAreaView>
     )

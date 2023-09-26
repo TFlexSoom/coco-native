@@ -5,8 +5,7 @@
  */
 
 import React from 'react';
-import { NavigationContainer, ParamListBase } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 import Chat from './src/screens/Chat';
 import ComingSoon from './src/screens/ComingSoon';
@@ -16,13 +15,11 @@ import Feedback from './src/screens/Feedback';
 import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import Profile from './src/screens/Profile';
-import SettingChange from './src/screens/SettingChange';
 import Settings from './src/screens/Settings';
 import Timeline from './src/screens/Timeline';
 import Trends from './src/screens/Trends';
 import createCocoNavigator from './src/navigator/CocoNavigator';
 import NavigatorTerms from './src/navigator/NavigatorTerms';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { AppScreenProps } from './src/navigator/NavigatorTypes';
 
 const Coco = createCocoNavigator();
@@ -30,8 +27,9 @@ const Coco = createCocoNavigator();
 interface AppScreen {
     name: string,
     component: (props: AppScreenProps) => JSX.Element,
-    isDrawer?: boolean | undefined,
-    isBottomTab?: boolean | undefined,
+    isDrawer?: boolean,
+    isBottomTab?: boolean,
+    isBackNav?: boolean,
 }
 
 const screens: Array<AppScreen> = [
@@ -76,20 +74,19 @@ const screens: Array<AppScreen> = [
         name: NavigatorTerms.PROFILE,
         component: Profile,
         isDrawer: true,
+        isBackNav: true,
     },
     {
         name: NavigatorTerms.SETTINGS,
         component: Settings,
         isDrawer: true,
-    },
-    {
-        name: NavigatorTerms.SETTING_CHANGE,
-        component: SettingChange,
+        isBackNav: true,
     },
     {
         name: NavigatorTerms.FEEDBACK,
         component: Feedback,
         isDrawer: true,
+        isBackNav: true,
     },
 ]
 

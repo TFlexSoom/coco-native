@@ -14,14 +14,14 @@ import {
 import Config from './Config'
 
 export interface TopBarProps {
-    OnButtonPress: ((event: GestureResponderEvent) => void)
+    onButtonPress: ((event: GestureResponderEvent) => void)
 }
 
-export default function TopBar({ OnButtonPress }: TopBarProps): JSX.Element {
+export default function TopBar({ onButtonPress }: TopBarProps): JSX.Element {
     return (
         <View>
             <TouchableHighlight
-                onPress={OnButtonPress}
+                onPress={onButtonPress}
             >
                 <Image
                     source={{
