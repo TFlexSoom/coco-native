@@ -18,6 +18,12 @@ enum ThirdParty {
     Apple = 4,
 }
 
+function getEnumValues(enumRef: any): Array<any> {
+    return Object.keys(enumRef).filter((item) => {
+        return isNaN(Number(item))
+    });
+}
+
 function IconButton(props: any): JSX.Element {
     return (
         <Button {...props} />
@@ -27,7 +33,7 @@ function IconButton(props: any): JSX.Element {
 export default function ThirdPartyLogins(props: any): JSX.Element {
     return (
         <>
-            {(Object.keys(ThirdParty) as Array<keyof typeof ThirdParty>).map(
+            {(getEnumValues(ThirdParty) as Array<keyof typeof ThirdParty>).map(
                 (thirdParty, index) => <IconButton
                     key={index}
                     party={thirdParty}

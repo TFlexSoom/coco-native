@@ -21,7 +21,7 @@ export default function Home({ navigation }: AppScreenProps): JSX.Element {
             <TopBar onButtonPress={() => navigation?.openDrawer()} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">
-                <Text> Welcome to Version {Config.versionNumber} </Text>
+                <Text className="text-xl text-{blue}"> Welcome to Version {Config.versionNumber} </Text>
                 <Text> Find Nutritional Agency in your diet </Text>
             </ScrollView>
         </SafeAreaView>

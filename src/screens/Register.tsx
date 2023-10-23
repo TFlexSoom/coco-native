@@ -38,51 +38,53 @@ function makeRegisterRequest({
 
 function RegisterForm(): JSX.Element {
     return (
-        <Formik
-            initialValues={{ email: '', username: '', password: '', passwordConfirm: '' } as RegisterRequest}
-            onSubmit={makeRegisterRequest}
-        >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <View>
-                    <TextInput
-                        onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email}
-                    />
-                    <TextInput
-                        onChangeText={handleChange('username')}
-                        onBlur={handleBlur('username')}
-                        value={values.username}
-                    />
-                    <TextInput
-                        onChangeText={handleChange('password')}
-                        onBlur={handleBlur('password')}
-                        value={values.username}
-                    />
-                    <TextInput
-                        onChangeText={handleChange('passwordConfirm')}
-                        onBlur={handleBlur('passwordConfirm')}
-                        value={values.username}
-                    />
-                    <Button
-                        onPress={
-                            handleSubmit as (values:
-                                GestureResponderEvent |
-                                React.FormEvent<HTMLFormElement> |
-                                undefined) => void
-                        }
-                        title="Register"
-                    />
-                    <Button
-                        onPress={/* TODO Nav to screen Login */ (e) => { }}
-                        title="Cancel"
-                    />
-                    <ThirdPartyLogins onPress={() => { }} />
-                    <Terms />
-                    <PrivacyPolicy />
-                </View>
-            )}
-        </Formik>
+        <>
+            <Formik
+                initialValues={{ email: '', username: '', password: '', passwordConfirm: '' } as RegisterRequest}
+                onSubmit={makeRegisterRequest}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                    <View>
+                        <TextInput
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                        />
+                        <TextInput
+                            onChangeText={handleChange('username')}
+                            onBlur={handleBlur('username')}
+                            value={values.username}
+                        />
+                        <TextInput
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                            value={values.username}
+                        />
+                        <TextInput
+                            onChangeText={handleChange('passwordConfirm')}
+                            onBlur={handleBlur('passwordConfirm')}
+                            value={values.username}
+                        />
+                        <Button
+                            onPress={
+                                handleSubmit as (values:
+                                    GestureResponderEvent |
+                                    React.FormEvent<HTMLFormElement> |
+                                    undefined) => void
+                            }
+                            title="Register"
+                        />
+                        <Button
+                            onPress={/* TODO Nav to screen Login */ (e) => { }}
+                            title="Cancel"
+                        />
+                    </View>
+                )}
+            </Formik>
+            <ThirdPartyLogins onPress={() => { }} />
+            <Terms />
+            <PrivacyPolicy />
+        </>
     );
 }
 
