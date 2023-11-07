@@ -6,7 +6,7 @@
 import React from 'react';
 import {
     SafeAreaView,
-    ScrollView,
+    View,
     StatusBar,
     Text,
 } from 'react-native';
@@ -19,11 +19,10 @@ export default function Home({ navigation }: AppScreenProps): JSX.Element {
         <SafeAreaView>
             <StatusBar />
             <TopBar onButtonPress={() => navigation?.openDrawer()} />
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic">
-                <Text className="text-xl text-{blue}"> Welcome to Version {Config.versionNumber} </Text>
-                <Text> Find Nutritional Agency in your diet </Text>
-            </ScrollView>
+            <View className=" items-center align-begin">
+                <Text className="mt-10 text-3xl text-[#1fb6ff]"> Welcome to Version {Config.versionNumber} </Text>
+                <Text className="text-xl"> Find Nutritional Agency in your diet </Text>
+            </View>
         </SafeAreaView>
     )
 }

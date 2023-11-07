@@ -5,11 +5,12 @@
 import React from 'react';
 import {
     GestureResponderEvent,
-    Image,
     Text,
     TouchableHighlight,
     View,
 } from 'react-native';
+
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import Config from './Config'
 
@@ -19,20 +20,17 @@ export interface TopBarProps {
 
 export default function TopBar({ onButtonPress }: TopBarProps): JSX.Element {
     return (
-        <View className="bg-[#000000] flex-row">
+        <View className="bg-[#000000] flex-row items-center">
             <TouchableHighlight
-                className="ml-4 mr-7"
+                className={
+                    " flex-0 ml-4 mr-7 my-2 items-center justify-center " +
+                    " border-[5px] border-[#FFFFFF] bg-[#FFFFFF] rounded-[100px] "
+                }
                 onPress={onButtonPress}
             >
-                {/* <Image
-                    source={{
-                        // TODO Replace with static image to be packaged with app
-                        uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='
-                    }}
-                /> */}
-                <Text className="text-xl">ICON</Text>
+                <MaterialIcon name="person" size={20} color="black" />
             </TouchableHighlight>
-            <Text className="text-xl">
+            <Text className="text-2xl ">
                 {Config.appTitle}
             </Text>
         </View >
