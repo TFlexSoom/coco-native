@@ -4,7 +4,7 @@
 
 import { styled } from 'nativewind';
 import React from 'react';
-import { Modal, Text, TouchableHighlight, View } from 'react-native';
+import { Alert, Modal, Text, TouchableHighlight, View } from 'react-native';
 
 const TailwindModal = styled(Modal);
 const TailwindView = styled(View);
@@ -120,7 +120,7 @@ export default function Navigation(props: NavigationProps): JSX.Element {
     const screen: Screen = screens[currentScreen];
 
     if (screen === undefined) {
-        console.error(`Screen ${currentScreen} Does Not Exist! Updating to ${initialScreen}!`)
+        Alert.alert(`Screen ${currentScreen} Does Not Exist! Updating to ${initialScreen}!`)
         updateCurrentScreen(initialScreen);
     }
 
