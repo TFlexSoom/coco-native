@@ -8,7 +8,7 @@ import {
     SafeAreaView,
     Image,
 } from 'react-native';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
 

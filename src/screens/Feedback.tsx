@@ -12,8 +12,8 @@ import {
 import TopBar from '../components/TopBar';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
-import NavigatorTerms from '../navigator/NavigatorTerms';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import NavigatorTerms from '../constants/NavigatorTerms';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 import { Formik } from 'formik';
 
 interface Feedback {

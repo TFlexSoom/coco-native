@@ -19,10 +19,10 @@ import Logo from '../components/Logo';
 import Terms from '../components/Terms';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import ThirdPartyLogins from '../components/ThirdPartyLogins';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
-import NavigatorTerms from '../navigator/NavigatorTerms';
+import NavigatorTerms from '../constants/NavigatorTerms';
 
 interface LoginRequest {
     username: string,

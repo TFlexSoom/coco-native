@@ -11,7 +11,7 @@ import {
     Text,
 } from 'react-native';
 import TopBar from '../components/TopBar';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 
 export default function ComingSoon({ navigation }: AppScreenProps): JSX.Element {
     return (

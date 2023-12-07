@@ -10,7 +10,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 import TopBar from '../components/TopBar';
 import { Link } from '@react-navigation/native';
 
@@ -44,7 +44,7 @@ export default function Discover({ navigation }: AppScreenProps): JSX.Element {
                 <View>
                     <Text>Headlines</Text>
                     {headlines.map(({ title, link }, index) =>
-                        <Link to={link}>{title}</Link>
+                        <Link key={index} to={link}>{title}</Link>
                     )}
                 </View>
 

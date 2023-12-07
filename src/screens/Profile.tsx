@@ -17,10 +17,10 @@ import {
     Image,
 } from 'react-native';
 
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
-import NavigatorTerms from '../navigator/NavigatorTerms';
+import NavigatorTerms from '../constants/NavigatorTerms';
 import TopBar from '../components/TopBar';
 
 interface ChangeProfileRequest {

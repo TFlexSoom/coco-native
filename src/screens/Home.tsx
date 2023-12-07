@@ -12,9 +12,11 @@ import {
 } from 'react-native';
 import TopBar from '../components/TopBar';
 import Config from '../components/Config';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 
 export default function Home({ navigation }: AppScreenProps): JSX.Element {
+    console.log(navigation);
+
     return (
         <SafeAreaView>
             <StatusBar />

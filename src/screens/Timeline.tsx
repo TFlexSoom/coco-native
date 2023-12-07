@@ -11,7 +11,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import { AppScreenProps } from '../navigator/NavigatorTypes';
+import { AppScreenProps } from '../constants/NavigatorTypes';
 import TopBar from '../components/TopBar';
 import SincePicker from '../components/SincePicker';
 

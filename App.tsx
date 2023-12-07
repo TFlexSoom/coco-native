@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 
 import Chat from './src/screens/Chat';
 import ComingSoon from './src/screens/ComingSoon';
@@ -18,94 +17,37 @@ import Profile from './src/screens/Profile';
 import Settings from './src/screens/Settings';
 import Timeline from './src/screens/Timeline';
 import Trends from './src/screens/Trends';
-import createCocoNavigator from './src/navigator/CocoNavigator';
-import NavigatorTerms from './src/navigator/NavigatorTerms';
-import { AppScreenProps } from './src/navigator/NavigatorTypes';
+import NavigatorTerms from './src/constants/NavigatorTerms';
+import Navigation, { CocoScreen } from './src/components/Navigation';
 
-const Coco = createCocoNavigator();
-
-interface AppScreen {
-    name: string,
-    component: (props: AppScreenProps) => JSX.Element,
-    isDrawer?: boolean,
-    isBottomTab?: boolean,
-    isBackNav?: boolean,
+const hiddenScreens: Record<string, CocoScreen> = {
+    [NavigatorTerms.LOGIN]: { component: Login },
+    [NavigatorTerms.DUO]: { component: Duo },
+    [NavigatorTerms.COMING_SOON]: { component: ComingSoon },
 }
 
-const screens: Array<AppScreen> = [
-    {
-        name: NavigatorTerms.LOGIN,
-        component: Login,
-    },
-    {
-        name: NavigatorTerms.DUO,
-        component: Duo,
-    },
-    {
-        name: NavigatorTerms.HOME,
-        component: Home,
-        isDrawer: true,
-    },
-    {
-        name: NavigatorTerms.COMING_SOON,
-        component: ComingSoon,
-    },
-    {
-        name: NavigatorTerms.CHAT,
-        component: Chat,
-        isBottomTab: true,
-    },
-    {
-        name: NavigatorTerms.TRENDS,
-        component: Trends,
-        isBottomTab: true,
-    },
-    {
-        name: NavigatorTerms.TIMELINE,
-        component: Timeline,
-        isBottomTab: true,
-    },
-    {
-        name: NavigatorTerms.DISCOVER,
-        component: Discover,
-        isBottomTab: true,
-    },
-    {
-        name: NavigatorTerms.PROFILE,
-        component: Profile,
-        isDrawer: true,
-        isBackNav: true,
-    },
-    {
-        name: NavigatorTerms.SETTINGS,
-        component: Settings,
-        isDrawer: true,
-        isBackNav: true,
-    },
-    {
-        name: NavigatorTerms.FEEDBACK,
-        component: Feedback,
-        isDrawer: true,
-        isBackNav: true,
-    },
-]
+const drawerScreens: Record<string, CocoScreen> = {
+    [NavigatorTerms.HOME]: { component: Home },
+    [NavigatorTerms.PROFILE]: { component: Profile },
+    [NavigatorTerms.SETTINGS]: { component: Settings },
+    [NavigatorTerms.FEEDBACK]: { component: Feedback },
+}
+
+
+const tabScreens: Record<string, CocoScreen> = {
+    [NavigatorTerms.CHAT]: { component: Chat },
+    [NavigatorTerms.TRENDS]: { component: Trends },
+    [NavigatorTerms.TIMELINE]: { component: Timeline },
+    [NavigatorTerms.DISCOVER]: { component: Discover },
+}
 
 export default function App(): JSX.Element {
     return (
-        <NavigationContainer>
-            <Coco.Navigator
-                initialScreen={NavigatorTerms.LOGIN}
-                backBehavior="history"
-            >
-                {screens.map(({ name, component, ...options }, index) =>
-                    <Coco.Screen
-                        key={index}
-                        name={name}
-                        component={component}
-                        options={options}
-                    />
-                )}
-            </Coco.Navigator>
-        </NavigationContainer>
+        <Navigation
+            initialScreen={NavigatorTerms.LOGIN}
+            hiddenScreens={hiddenScreens}
+            drawerScreens={drawerScreens}
+            tabScreens={tabScreens}
+        />
     );
 }
