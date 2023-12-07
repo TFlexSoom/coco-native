@@ -19,10 +19,8 @@ import {
     Switch,
 } from 'react-native';
 
-import { AppScreenProps } from '../constants/NavigatorTypes';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ParamListBase } from '@react-navigation/native';
 import NavigatorTerms from '../constants/NavigatorTerms';
+import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
 import TopBar from '../components/TopBar';
 
 interface ChangeProfileRequest {
@@ -32,10 +30,10 @@ interface ChangeProfileRequest {
 }
 
 function changeProfileRequest(
-    navigation: DrawerNavigationProp<ParamListBase>,
+    navigator: ScreenNavigator,
     { username, password, duo }: ChangeProfileRequest
 ): void {
-    navigation.navigate(NavigatorTerms.HOME);
+    navigator.navigate(NavigatorTerms.HOME);
 }
 
 function changePhoto(photo: string): void {
@@ -66,10 +64,12 @@ const settings: Array<Setting> = [
     }
 ]
 
-export default function Settings({ navigation }: AppScreenProps): JSX.Element {
+export default function Settings(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     return (
         <>
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator?.openDrawer()} />
             {settings.map(({ name, currentVal }, index) =>
                 <View key={index}>
                     <Text>{name}</Text>

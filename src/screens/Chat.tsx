@@ -4,7 +4,6 @@
 
 import React from 'react';
 import {
-    Button,
     Image,
     SafeAreaView,
     ScrollView,
@@ -12,7 +11,7 @@ import {
     Text,
     TouchableOpacity,
 } from 'react-native';
-import { AppScreenProps } from '../constants/NavigatorTypes';
+import { NavigatorContext } from '../components/Navigation';
 import TopBar from '../components/TopBar';
 import SincePicker from '../components/SincePicker';
 
@@ -22,7 +21,7 @@ interface Chat {
     date: Date,
 }
 
-const chats: Array<Chat> = [
+const chats: Chat[] = [
     {
         fromMe: false,
         text: "Hello Example",
@@ -45,11 +44,13 @@ const chats: Array<Chat> = [
     },
 ]
 
-export default function Chat({ navigation }: AppScreenProps): JSX.Element {
+export default function Chat(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator.openDrawer()} />
             <SincePicker onPickedOption={(since: Date) => { }} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">

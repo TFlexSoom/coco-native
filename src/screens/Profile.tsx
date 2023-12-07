@@ -17,10 +17,8 @@ import {
     Image,
 } from 'react-native';
 
-import { AppScreenProps } from '../constants/NavigatorTypes';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ParamListBase } from '@react-navigation/native';
 import NavigatorTerms from '../constants/NavigatorTerms';
+import { NavigatorContext, ScreenNavigator, ScreenProps } from '../components/Navigation';
 import TopBar from '../components/TopBar';
 
 interface ChangeProfileRequest {
@@ -30,17 +28,18 @@ interface ChangeProfileRequest {
 }
 
 function changeProfileRequest(
-    navigation: DrawerNavigationProp<ParamListBase>,
+    navigator: ScreenNavigator,
     { username, password, duo }: ChangeProfileRequest
 ): void {
-    navigation.navigate(NavigatorTerms.HOME);
+    navigator.navigate(NavigatorTerms.HOME);
 }
 
 function changePhoto(photo: string): void {
     /** TODO **/
 }
 
-export default function Profile({ navigation }: AppScreenProps): JSX.Element {
+export default function Profile(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
 
     const image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==';
     const username = "";
@@ -49,13 +48,13 @@ export default function Profile({ navigation }: AppScreenProps): JSX.Element {
 
     return (
         <>
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator.openDrawer()} />
             <TouchableHighlight onPress={() => changePhoto(image)}>
                 <Image source={{ uri: image }} />
             </TouchableHighlight>
             <Formik
                 initialValues={{ username: username, password: password, duo: duo } as ChangeProfileRequest}
-                onSubmit={changeProfileRequest.bind(null, navigation)}
+                onSubmit={changeProfileRequest.bind(null, navigator)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>

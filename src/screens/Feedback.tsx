@@ -9,11 +9,9 @@ import {
     TextInput,
     View,
 } from 'react-native';
+import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
 import TopBar from '../components/TopBar';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ParamListBase } from '@react-navigation/native';
 import NavigatorTerms from '../constants/NavigatorTerms';
-import { AppScreenProps } from '../constants/NavigatorTypes';
 import { Formik } from 'formik';
 
 interface Feedback {
@@ -21,22 +19,22 @@ interface Feedback {
 }
 
 function submitFeedback(
-    navigation: DrawerNavigationProp<ParamListBase>,
+    navigator: ScreenNavigator,
     { text }: Feedback
 ): void {
-    navigation.navigate(NavigatorTerms.HOME);
+    navigator.navigate(NavigatorTerms.HOME);
 }
 
-export default function Feedback({ navigation }: AppScreenProps): JSX.Element {
-
+export default function Feedback(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
     const feedback = "";
 
     return (
         <>
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator?.openDrawer()} />
             <Formik
                 initialValues={{ text: feedback, } as Feedback}
-                onSubmit={submitFeedback.bind(null, navigation)}
+                onSubmit={submitFeedback.bind(null, navigator)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>

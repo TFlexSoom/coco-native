@@ -18,15 +18,15 @@ import Settings from './src/screens/Settings';
 import Timeline from './src/screens/Timeline';
 import Trends from './src/screens/Trends';
 import NavigatorTerms from './src/constants/NavigatorTerms';
-import Navigation, { CocoScreen } from './src/components/Navigation';
+import Navigation, { Screen } from './src/components/Navigation';
 
-const hiddenScreens: Record<string, CocoScreen> = {
+const hiddenScreens: Record<string, Screen> = {
     [NavigatorTerms.LOGIN]: { component: Login },
     [NavigatorTerms.DUO]: { component: Duo },
     [NavigatorTerms.COMING_SOON]: { component: ComingSoon },
 }
 
-const drawerScreens: Record<string, CocoScreen> = {
+const drawerScreens: Record<string, Screen> = {
     [NavigatorTerms.HOME]: { component: Home },
     [NavigatorTerms.PROFILE]: { component: Profile },
     [NavigatorTerms.SETTINGS]: { component: Settings },
@@ -34,7 +34,7 @@ const drawerScreens: Record<string, CocoScreen> = {
 }
 
 
-const tabScreens: Record<string, CocoScreen> = {
+const tabScreens: Record<string, Screen> = {
     [NavigatorTerms.CHAT]: { component: Chat },
     [NavigatorTerms.TRENDS]: { component: Trends },
     [NavigatorTerms.TIMELINE]: { component: Timeline },

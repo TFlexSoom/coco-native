@@ -12,15 +12,15 @@ import {
 } from 'react-native';
 import TopBar from '../components/TopBar';
 import Config from '../components/Config';
-import { AppScreenProps } from '../constants/NavigatorTypes';
+import { NavigatorContext } from '../components/Navigation';
 
-export default function Home({ navigation }: AppScreenProps): JSX.Element {
-    console.log(navigation);
+export default function Home(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
 
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator?.openDrawer()} />
             <View className=" items-center align-begin">
                 <Text className="mt-10 text-3xl text-[#1fb6ff]"> Welcome to Version {Config.versionNumber} </Text>
                 <Text className="text-xl"> Find Nutritional Agency in your diet </Text>

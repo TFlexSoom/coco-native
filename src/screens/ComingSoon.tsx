@@ -10,14 +10,16 @@ import {
     StatusBar,
     Text,
 } from 'react-native';
+import { NavigatorContext } from '../components/Navigation';
 import TopBar from '../components/TopBar';
-import { AppScreenProps } from '../constants/NavigatorTypes';
 
-export default function ComingSoon({ navigation }: AppScreenProps): JSX.Element {
+export default function ComingSoon(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator.openDrawer()} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">
                 <Text> Coming Soon </Text>

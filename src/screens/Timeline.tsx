@@ -11,7 +11,8 @@ import {
     Text,
     View,
 } from 'react-native';
-import { AppScreenProps } from '../constants/NavigatorTypes';
+
+import { NavigatorContext } from '../components/Navigation';
 import TopBar from '../components/TopBar';
 import SincePicker from '../components/SincePicker';
 
@@ -49,11 +50,13 @@ const meals: Array<TimelineMeal> = [
     },
 ]
 
-export default function Timeline({ navigation }: AppScreenProps): JSX.Element {
+export default function Timeline(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator.openDrawer()} />
             <SincePicker onPickedOption={(since: Date) => { }} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">

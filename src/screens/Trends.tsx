@@ -10,11 +10,13 @@ import {
     Text,
     View,
 } from 'react-native';
-import { AppScreenProps } from '../constants/NavigatorTypes';
+import { NavigatorContext } from '../components/Navigation';
 import TopBar from '../components/TopBar';
 import SincePicker from '../components/SincePicker';
 
-export default function Trends({ navigation }: AppScreenProps): JSX.Element {
+export default function Trends(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     const totalCalories = 100;
     const totalFat = 20;
     const totalCarbs = 30;
@@ -23,7 +25,7 @@ export default function Trends({ navigation }: AppScreenProps): JSX.Element {
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator.openDrawer()} />
             <SincePicker onPickedOption={(since: Date) => { }} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">

@@ -19,10 +19,8 @@ import Logo from '../components/Logo';
 import Terms from '../components/Terms';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import ThirdPartyLogins from '../components/ThirdPartyLogins';
-import { AppScreenProps } from '../constants/NavigatorTypes';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ParamListBase } from '@react-navigation/native';
 import NavigatorTerms from '../constants/NavigatorTerms';
+import { NavigatorContext, ScreenNavigator, ScreenProps } from '../components/Navigation';
 
 interface LoginRequest {
     username: string,
@@ -30,18 +28,20 @@ interface LoginRequest {
 }
 
 function makeLoginRequest(
-    navigation: DrawerNavigationProp<ParamListBase>,
+    navigator: ScreenNavigator,
     { username, password }: LoginRequest
 ): void {
-    navigation.navigate(NavigatorTerms.DUO)
+    navigator.navigate(NavigatorTerms.DUO)
 }
 
-function LoginForm({ navigation }: AppScreenProps): JSX.Element {
+function LoginForm(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     return (
         <>
             <Formik
                 initialValues={{ username: '', password: '' } as LoginRequest}
-                onSubmit={makeLoginRequest.bind(null, navigation)}
+                onSubmit={makeLoginRequest.bind(null, navigator)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
@@ -68,14 +68,14 @@ function LoginForm({ navigation }: AppScreenProps): JSX.Element {
                     </View>
                 )}
             </Formik>
-            <ThirdPartyLogins onPress={makeLoginRequest.bind(null, navigation)} />
+            <ThirdPartyLogins onPress={makeLoginRequest.bind(null, navigator)} />
             <Terms />
             <PrivacyPolicy />
         </>
     );
 }
 
-export default function Login(props: AppScreenProps): JSX.Element {
+export default function Login(props: ScreenProps): JSX.Element {
     return (
         <SafeAreaView>
             <Logo />

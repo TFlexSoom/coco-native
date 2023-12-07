@@ -10,9 +10,9 @@ import {
     Text,
     View,
 } from 'react-native';
-import { AppScreenProps } from '../constants/NavigatorTypes';
+import { NavigatorContext } from '../components/Navigation';
 import TopBar from '../components/TopBar';
-import { Link } from '@react-navigation/native';
+import Link from '../components/Link';
 
 interface Headline {
     title: string,
@@ -34,17 +34,21 @@ const headlines: Array<Headline> = [
     },
 ]
 
-export default function Discover({ navigation }: AppScreenProps): JSX.Element {
+export default function Discover(): JSX.Element {
+    const navigator = React.useContext(NavigatorContext);
+
     return (
         <SafeAreaView>
             <StatusBar />
-            <TopBar onButtonPress={() => navigation?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator?.openDrawer()} />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">
                 <View>
                     <Text>Headlines</Text>
                     {headlines.map(({ title, link }, index) =>
-                        <Link key={index} to={link}>{title}</Link>
+                        <Link key={index} to={link}>
+                            <Text>{title}</Text>
+                        </Link>
                     )}
                 </View>
 
