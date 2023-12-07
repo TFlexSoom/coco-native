@@ -6,6 +6,8 @@
 
 import React from 'react';
 
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
 import Chat from './src/screens/Chat';
 import ComingSoon from './src/screens/ComingSoon';
 import Discover from './src/screens/Discover';
@@ -18,36 +20,45 @@ import Settings from './src/screens/Settings';
 import Timeline from './src/screens/Timeline';
 import Trends from './src/screens/Trends';
 import NavigatorTerms from './src/constants/NavigatorTerms';
-import Navigation, { Screen } from './src/components/Navigation';
+import Navigation, { DrawerContent, Screen, TabContent } from './src/components/Navigation';
 
-const hiddenScreens: Record<string, Screen> = {
-    [NavigatorTerms.LOGIN]: { component: Login },
-    [NavigatorTerms.DUO]: { component: Duo },
+
+const screens: Record<string, Screen> = {
+    [NavigatorTerms.LOGIN]: { component: Login, hideDrawer: true, hideTabs: true },
+    [NavigatorTerms.DUO]: { component: Duo, hideDrawer: true, hideTabs: true },
     [NavigatorTerms.COMING_SOON]: { component: ComingSoon },
-}
-
-const drawerScreens: Record<string, Screen> = {
     [NavigatorTerms.HOME]: { component: Home },
     [NavigatorTerms.PROFILE]: { component: Profile },
     [NavigatorTerms.SETTINGS]: { component: Settings },
     [NavigatorTerms.FEEDBACK]: { component: Feedback },
-}
-
-
-const tabScreens: Record<string, Screen> = {
     [NavigatorTerms.CHAT]: { component: Chat },
     [NavigatorTerms.TRENDS]: { component: Trends },
     [NavigatorTerms.TIMELINE]: { component: Timeline },
     [NavigatorTerms.DISCOVER]: { component: Discover },
 }
 
+const drawerContent: Record<string, DrawerContent> = {
+    [NavigatorTerms.HOME]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.PROFILE]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.SETTINGS]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.FEEDBACK]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+}
+
+
+const tabContent: Record<string, TabContent> = {
+    [NavigatorTerms.CHAT]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.TRENDS]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.TIMELINE]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.DISCOVER]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+}
+
 export default function App(): JSX.Element {
     return (
         <Navigation
             initialScreen={NavigatorTerms.LOGIN}
-            hiddenScreens={hiddenScreens}
-            drawerScreens={drawerScreens}
-            tabScreens={tabScreens}
+            drawerContent={drawerContent}
+            tabContent={tabContent}
+            screens={screens}
         />
     );
 }

@@ -86,8 +86,8 @@ export default function Profile(): JSX.Element {
                     </View>
                 )}
             </Formik>
-            <Button title="Logout" onPress={() => { }} />
-            <Button title="Delete Account" onPress={() => { }} />
+            <Button title="Logout" onPress={() => navigator.navigate(NavigatorTerms.LOGIN)} />
+            <Button title="Delete Account" onPress={() => navigator.navigate(NavigatorTerms.LOGIN)} />
         </>
     );
 }

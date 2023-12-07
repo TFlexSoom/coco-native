@@ -9,12 +9,7 @@ import {
 
 import {
     View,
-    SafeAreaView,
     Button,
-    TextInput,
-    GestureResponderEvent,
-    TouchableHighlight,
-    Image,
     Text,
     Switch,
 } from 'react-native';
@@ -69,15 +64,15 @@ export default function Settings(): JSX.Element {
 
     return (
         <>
-            <TopBar onButtonPress={() => navigator?.openDrawer()} />
+            <TopBar onButtonPress={() => navigator.openDrawer()} />
             {settings.map(({ name, currentVal }, index) =>
                 <View key={index}>
                     <Text>{name}</Text>
                     <Switch onValueChange={() => { }} value={currentVal} />
                 </View>
             )}
-            <Button title="Logout" onPress={() => { }} />
-            <Button title="Delete Account" onPress={() => { }} />
+            <Button title="Logout" onPress={() => navigator.navigate(NavigatorTerms.LOGIN)} />
+            <Button title="Delete Account" onPress={() => navigator.navigate(NavigatorTerms.LOGIN)} />
         </>
     );
 }

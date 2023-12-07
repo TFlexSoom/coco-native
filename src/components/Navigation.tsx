@@ -2,8 +2,12 @@
  * Logo For Splash and Login
  */
 
+import { styled } from 'nativewind';
 import React from 'react';
 import { Modal, Text, TouchableHighlight, View } from 'react-native';
+
+const TailwindModal = styled(Modal);
+const TailwindView = styled(View);
 
 export interface ScreenNavigator {
     navigate: (screenName: string) => void
@@ -27,56 +31,64 @@ export interface Screen {
     hideTabs?: boolean,
 }
 
-export interface NavigationProps {
-    initialScreen: string
-    hiddenScreens: Record<string, Screen>
-    drawerScreens: Record<string, Screen>
-    tabScreens: Record<string, Screen>
+export interface DrawerContent {
+    icon: JSX.Element
 }
 
 interface NavigationDrawerProps {
-    drawerScreens: Record<string, Screen>
+    drawerContent: Record<string, DrawerContent>
     updateScreen: (screenName: string) => void
     closeDrawer: () => void
     isOut: boolean
 }
 
 function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
-    const { drawerScreens, updateScreen, closeDrawer, isOut } = props;
+    const { drawerContent, updateScreen, closeDrawer, isOut } = props;
 
     if (!isOut) {
         return <></>;
     }
 
     return (
-        <Modal>
-            <View>
+        <TailwindModal
+            className=" bg-[#000000] "
+            animationType='slide'
+            transparent={true}
+            onDismiss={closeDrawer}
+            onRequestClose={closeDrawer}
+
+        >
+            <TailwindView className=" bg-[#000000] ">
                 <TouchableHighlight onPress={closeDrawer}>
                     <Text>Username</Text>
                 </TouchableHighlight>
-                {Object.keys(drawerScreens).map((key, index) => (
+                {Object.keys(drawerContent).map((key, index) => (
                     <TouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
                         <Text>
                             {key}
                         </Text>
                     </TouchableHighlight>
                 ))}
-            </View>
-        </Modal>
+            </TailwindView>
+        </TailwindModal>
     )
 }
 
+export interface TabContent {
+    icon: JSX.Element
+}
+
 interface NavigationTabProps {
-    tabScreens: Record<string, Screen>
+    tabContent: Record<string, TabContent>
     updateScreen: (screenName: string) => void
 }
 
 function NavigationTab(props: NavigationTabProps): JSX.Element {
-    const { tabScreens, updateScreen } = props;
+    const { tabContent, updateScreen } = props;
 
     return (
         <View>
-            {Object.keys(tabScreens).map((key, index) => (
+            {Object.keys(tabContent).map((key, index) => (
                 <TouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
                     <Text>
                         {key}
@@ -87,9 +99,15 @@ function NavigationTab(props: NavigationTabProps): JSX.Element {
     )
 }
 
+export interface NavigationProps {
+    initialScreen: string
+    drawerContent: Record<string, DrawerContent>
+    tabContent: Record<string, TabContent>
+    screens: Record<string, Screen>
+}
 
 export default function Navigation(props: NavigationProps): JSX.Element {
-    const { initialScreen, hiddenScreens, drawerScreens, tabScreens } = props;
+    const { initialScreen, drawerContent, tabContent, screens } = props;
 
     const [currentScreen, updateCurrentScreen] = React.useState(initialScreen);
     const [isDrawerShown, updateIsDrawerShown] = React.useState(false);
@@ -99,9 +117,9 @@ export default function Navigation(props: NavigationProps): JSX.Element {
         updateCurrentScreen(screenName);
     }
 
-    const screen: Screen = drawerScreens[currentScreen] || tabScreens[currentScreen] || hiddenScreens[currentScreen] || null;
+    const screen: Screen = screens[currentScreen];
 
-    if (screen === null) {
+    if (screen === undefined) {
         console.error(`Screen ${currentScreen} Does Not Exist! Updating to ${initialScreen}!`)
         updateCurrentScreen(initialScreen);
     }
@@ -114,13 +132,17 @@ export default function Navigation(props: NavigationProps): JSX.Element {
         }}>
             {screen.hideDrawer ||
                 <NavigationDrawer
-                    drawerScreens={drawerScreens}
+                    drawerContent={drawerContent}
                     updateScreen={updateScreenAndCloseDrawer}
                     closeDrawer={closeDrawer}
                     isOut={isDrawerShown}
                 />}
             <screen.component />
-            {screen.hideTabs || <NavigationTab tabScreens={tabScreens} updateScreen={updateCurrentScreen} />}
+            {screen.hideTabs ||
+                <NavigationTab
+                    tabContent={tabContent}
+                    updateScreen={updateCurrentScreen}
+                />}
         </NavigatorContext.Provider>
     )
 }

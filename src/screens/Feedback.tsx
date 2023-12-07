@@ -56,8 +56,6 @@ export default function Feedback(): JSX.Element {
                     </View>
                 )}
             </Formik>
-            <Button title="Logout" onPress={() => { }} />
-            <Button title="Delete Account" onPress={() => { }} />
         </>
     );
 }
