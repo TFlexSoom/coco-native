@@ -3,17 +3,19 @@
  */
 
 import React from 'react';
-import {
-    Image
-} from 'react-native';
+import NWImage from '../primitives/NWImage';
+import NWView from '../primitives/NWView';
 
 export default function Logo(): JSX.Element {
     return (
-        <Image
-            source={{
-                // TODO Replace with static image to be packaged with app
-                uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-            }}
-        />
+        <NWView className=' flex items-center my-5 '>
+            <NWImage
+                className=' h-[100px] '
+                style={{
+                    resizeMode: 'contain',
+                }}
+                source={require('../images/cocoLogo.jpg')}
+            />
+        </NWView>
     )
 }

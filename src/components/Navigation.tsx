@@ -2,12 +2,11 @@
  * Logo For Splash and Login
  */
 
-import { styled } from 'nativewind';
 import React from 'react';
-import { Alert, Modal, Text, TouchableHighlight, View } from 'react-native';
-
-const TailwindModal = styled(Modal);
-const TailwindView = styled(View);
+import { Alert, Text, TouchableHighlight, View } from 'react-native';
+import NWModal from '../primitives/NWModal';
+import NWView from '../primitives/NWView';
+import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 
 export interface ScreenNavigator {
     navigate: (screenName: string) => void
@@ -50,15 +49,15 @@ function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
     }
 
     return (
-        <TailwindModal
-            className=" bg-[#000000] "
+        <NWModal
+            className=" bg-[#000000FF] "
             animationType='slide'
             transparent={true}
             onDismiss={closeDrawer}
             onRequestClose={closeDrawer}
 
         >
-            <TailwindView className=" bg-[#000000] ">
+            <NWView className=" bg-[#000000FF] ">
                 <TouchableHighlight onPress={closeDrawer}>
                     <Text>Username</Text>
                 </TouchableHighlight>
@@ -69,8 +68,8 @@ function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
                         </Text>
                     </TouchableHighlight>
                 ))}
-            </TailwindView>
-        </TailwindModal>
+            </NWView>
+        </NWModal>
     )
 }
 
@@ -87,15 +86,15 @@ function NavigationTab(props: NavigationTabProps): JSX.Element {
     const { tabContent, updateScreen } = props;
 
     return (
-        <View>
+        <NWView>
             {Object.keys(tabContent).map((key, index) => (
-                <TouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
+                <NWTouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
                     <Text>
                         {key}
                     </Text>
-                </TouchableHighlight>
+                </NWTouchableHighlight>
             ))}
-        </View>
+        </NWView>
     )
 }
 

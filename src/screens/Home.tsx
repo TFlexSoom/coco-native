@@ -4,27 +4,25 @@
  */
 
 import React from 'react';
-import {
-    SafeAreaView,
-    View,
-    StatusBar,
-    Text,
-} from 'react-native';
 import TopBar from '../components/TopBar';
 import Config from '../components/Config';
 import { NavigatorContext } from '../components/Navigation';
+import NWSafeAreaView from '../primitives/NWSafeAreaView';
+import NWView from '../primitives/NWView';
+import NWText from '../primitives/NWText';
+import NWStatusBar from '../primitives/NWStatusBar';
 
 export default function Home(): JSX.Element {
     const navigator = React.useContext(NavigatorContext);
 
     return (
-        <SafeAreaView>
-            <StatusBar />
+        <NWSafeAreaView>
+            <NWStatusBar />
             <TopBar onButtonPress={() => navigator?.openDrawer()} />
-            <View className=" items-center align-begin">
-                <Text className="mt-10 text-3xl text-[#1fb6ff]"> Welcome to Version {Config.versionNumber} </Text>
-                <Text className="text-xl"> Find Nutritional Agency in your diet </Text>
-            </View>
-        </SafeAreaView>
+            <NWView className=" items-center align-begin">
+                <NWText className="mt-10 text-3xl text-[#1fb6ff]"> Welcome to Version {Config.versionNumber} </NWText>
+                <NWText className="text-xl"> Find Nutritional Agency in your diet </NWText>
+            </NWView>
+        </NWSafeAreaView>
     )
 }

@@ -4,15 +4,14 @@
 
 import React from 'react';
 import {
-    GestureResponderEvent,
-    Text,
-    TouchableHighlight,
-    View,
+    GestureResponderEvent
 } from 'react-native';
 
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-
 import Config from './Config'
+import NWView from '../primitives/NWView';
+import NWText from '../primitives/NWText';
+import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 
 export interface TopBarProps {
     onButtonPress: ((event: GestureResponderEvent) => void)
@@ -20,20 +19,20 @@ export interface TopBarProps {
 
 export default function TopBar({ onButtonPress }: TopBarProps): JSX.Element {
     return (
-        <View className="bg-[#000000] flex-row items-center">
-            <TouchableHighlight
+        <NWView className=" flex flex-row bg-[#000000FF] items-center ">
+            <NWTouchableHighlight
                 className={
-                    " flex-0 ml-4 mr-7 my-2 items-center justify-center " +
+                    " flex flex-col ml-4 mr-7 my-2 items-center justify-center " +
                     " border-[5px] border-[#FFFFFF] bg-[#FFFFFF] rounded-[100px] "
                 }
                 onPress={onButtonPress}
             >
                 <MaterialIcon name="person" size={20} color="black" />
-            </TouchableHighlight>
-            <Text className="text-2xl ">
+            </NWTouchableHighlight>
+            <NWText className="text-2xl ">
                 {Config.appTitle}
-            </Text>
-        </View >
+            </NWText>
+        </NWView >
 
     )
 }

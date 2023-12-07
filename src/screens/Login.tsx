@@ -21,6 +21,7 @@ import PrivacyPolicy from '../components/PrivacyPolicy';
 import ThirdPartyLogins from '../components/ThirdPartyLogins';
 import NavigatorTerms from '../constants/NavigatorTerms';
 import { NavigatorContext, ScreenNavigator, ScreenProps } from '../components/Navigation';
+import NWSafeAreaView from '../primitives/NWSafeAreaView';
 
 interface LoginRequest {
     username: string,
@@ -38,7 +39,7 @@ function LoginForm(): JSX.Element {
     const navigator = React.useContext(NavigatorContext);
 
     return (
-        <>
+        <View>
             <Formik
                 initialValues={{ username: '', password: '' } as LoginRequest}
                 onSubmit={makeLoginRequest.bind(null, navigator)}
@@ -71,15 +72,15 @@ function LoginForm(): JSX.Element {
             <ThirdPartyLogins onPress={makeLoginRequest.bind(null, navigator)} />
             <Terms />
             <PrivacyPolicy />
-        </>
+        </ View>
     );
 }
 
 export default function Login(props: ScreenProps): JSX.Element {
     return (
-        <SafeAreaView>
+        <NWSafeAreaView>
             <Logo />
             <LoginForm {...props} />
-        </SafeAreaView>
+        </NWSafeAreaView>
     )
 }
