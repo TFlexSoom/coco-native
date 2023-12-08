@@ -14,7 +14,7 @@ export default function Logo(): JSX.Element {
                 style={{
                     resizeMode: 'contain',
                 }}
-                source={require('../images/cocoLogo.jpg')}
+                source={require('../images/cocoNewLogo.png')}
             />
         </NWView>
     )
