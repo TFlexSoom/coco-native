@@ -10,11 +10,13 @@ import React from 'react';
 import {
     Text
 } from 'react-native';
+import Link from './Link';
+import Config from './Config';
 
 export default function PrivacyPolicy(): JSX.Element {
     return (
-        <Text>
-            Privacy Policy
-        </Text>
+        <Link to={Config.termsOfService}>
+            <Text>Privacy Policy</Text>
+        </Link>
     )
 }

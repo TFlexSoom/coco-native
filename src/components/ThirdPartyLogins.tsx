@@ -6,10 +6,8 @@
  */
 
 import React from 'react';
-
-import {
-    Button
-} from 'react-native';
+import { getEnumValues } from '../helpers/Enum';
+import NWButton from '../primitives/NWButton';
 
 enum ThirdParty {
     Google = 1,
@@ -18,22 +16,16 @@ enum ThirdParty {
     Apple = 4,
 }
 
-function getEnumValues(enumRef: any): Array<any> {
-    return Object.keys(enumRef).filter((item) => {
-        return isNaN(Number(item))
-    });
-}
-
 function IconButton(props: any): JSX.Element {
     return (
-        <Button {...props} />
+        <NWButton {...props} />
     )
 }
 
 export default function ThirdPartyLogins(props: any): JSX.Element {
     return (
         <>
-            {(getEnumValues(ThirdParty) as Array<keyof typeof ThirdParty>).map(
+            {(getEnumValues(ThirdParty) as Array<ThirdParty>).map(
                 (thirdParty, index) => <IconButton
                     key={index}
                     party={thirdParty}
