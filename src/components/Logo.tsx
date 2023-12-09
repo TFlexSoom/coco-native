@@ -8,7 +8,7 @@ import NWView from '../primitives/NWView';
 
 export default function Logo(): JSX.Element {
     return (
-        <NWView className=' flex items-center my-5 '>
+        <NWView className=' flex items-center '>
             <NWImage
                 className=' h-[100px] '
                 style={{
