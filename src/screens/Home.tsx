@@ -19,9 +19,9 @@ export default function Home(): JSX.Element {
         <NWSafeAreaView>
             <NWStatusBar />
             <TopBar onButtonPress={() => navigator?.openDrawer()} />
-            <NWView className=" items-center align-begin">
-                <NWText className="mt-10 text-3xl text-[#1fb6ff]"> Welcome to Version {Config.versionNumber} </NWText>
-                <NWText className="text-xl"> Find Nutritional Agency in your diet </NWText>
+            <NWView className=" items-center align-begin ">
+                <NWText className=" mt-10 text-3xl text-[#A62A72FF] "> Welcome to Version {Config.versionNumber} </NWText>
+                <NWText className=" text-xl text-[#C678A6] "> Find Nutritional Agency in your diet </NWText>
             </NWView>
         </NWSafeAreaView>
     )

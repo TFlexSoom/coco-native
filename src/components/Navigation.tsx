@@ -3,9 +3,10 @@
  */
 
 import React from 'react';
-import { Alert, Text, TouchableHighlight, View } from 'react-native';
+import { Alert, TouchableHighlight } from 'react-native';
 import NWModal from '../primitives/NWModal';
 import NWView from '../primitives/NWView';
+import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 
 export interface ScreenNavigator {
@@ -59,13 +60,13 @@ function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
         >
             <NWView className=" bg-[#000000FF] ">
                 <TouchableHighlight onPress={closeDrawer}>
-                    <Text>Username</Text>
+                    <NWText>Username</NWText>
                 </TouchableHighlight>
                 {Object.keys(drawerContent).map((key, index) => (
                     <TouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
-                        <Text>
+                        <NWText>
                             {key}
-                        </Text>
+                        </NWText>
                     </TouchableHighlight>
                 ))}
             </NWView>
@@ -86,15 +87,20 @@ function NavigationTab(props: NavigationTabProps): JSX.Element {
     const { tabContent, updateScreen } = props;
 
     return (
-        <NWView>
-            {Object.keys(tabContent).map((key, index) => (
-                <NWTouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
-                    <Text>
-                        {key}
-                    </Text>
-                </NWTouchableHighlight>
-            ))}
-        </NWView>
+        <>
+            <NWView className=" flex-1 flex-row justify-evenly bg-[#A62A72FF] absolute bottom-0 w-screen ">
+                {Object.keys(tabContent).map((key, index) => (
+                    <NWTouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
+                        <NWView className=" flex-0 flex-col items-center min-w-[20%] mt-2" >
+                            {tabContent[key].icon}
+                            <NWText className=" text-sm ">
+                                {key}
+                            </NWText>
+                        </NWView>
+                    </NWTouchableHighlight>
+                ))}
+            </NWView>
+        </>
     )
 }
 

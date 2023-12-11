@@ -64,7 +64,7 @@ function LoginForm(): JSX.Element {
                             placeholder=' Password'
                         />
                         <NWTouchableHighlight
-                            className=' flex-0 items-center justify-center bg-[#C678A6] py-1 '
+                            className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
                             onPress={
                                 handleSubmit as (values:
                                     GestureResponderEvent |

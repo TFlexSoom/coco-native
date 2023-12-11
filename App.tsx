@@ -38,18 +38,18 @@ const screens: Record<string, Screen> = {
 }
 
 const drawerContent: Record<string, DrawerContent> = {
-    [NavigatorTerms.HOME]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
-    [NavigatorTerms.PROFILE]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
-    [NavigatorTerms.SETTINGS]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
-    [NavigatorTerms.FEEDBACK]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.HOME]: { icon: <MaterialIcon name="home" size={15} color="black" /> },
+    [NavigatorTerms.PROFILE]: { icon: <MaterialIcon name="manage-accounts" size={15} color="black" /> },
+    [NavigatorTerms.SETTINGS]: { icon: <MaterialIcon name="settings" size={15} color="black" /> },
+    [NavigatorTerms.FEEDBACK]: { icon: <MaterialIcon name="feedback" size={15} color="black" /> },
 }
 
 
 const tabContent: Record<string, TabContent> = {
-    [NavigatorTerms.CHAT]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
-    [NavigatorTerms.TRENDS]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
-    [NavigatorTerms.TIMELINE]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
-    [NavigatorTerms.DISCOVER]: { icon: <MaterialIcon name="person" size={10} color="black" /> },
+    [NavigatorTerms.CHAT]: { icon: <MaterialIcon name="chat" size={22} color="white" /> },
+    [NavigatorTerms.TRENDS]: { icon: <MaterialIcon name="leaderboard" size={22} color="white" /> },
+    [NavigatorTerms.TIMELINE]: { icon: <MaterialIcon name="timeline" size={22} color="white" /> },
+    [NavigatorTerms.DISCOVER]: { icon: <MaterialIcon name="search" size={22} color="white" /> },
 }
 
 export default function App(): JSX.Element {
