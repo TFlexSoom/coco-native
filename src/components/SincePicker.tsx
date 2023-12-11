@@ -7,10 +7,13 @@ import NWModal from '../primitives/NWModal';
 import NWButton from '../primitives/NWButton';
 import { getEnumValues } from '../helpers/Enum';
 import moment, { Moment } from 'moment';
+import NWText from '../primitives/NWText';
+import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
+import NWView from '../primitives/NWView';
 
 export interface SincePickerProps {
     currentSinceOption?: SinceOption
-    updateSinceOption: (since: SinceOption) => void,
+    updateSinceOption: (since: number) => void,
 }
 
 enum SinceOption {
@@ -22,7 +25,7 @@ enum SinceOption {
     // SinceSpecific = 6,
 }
 
-const sinceOptionTitleMap: Record<SinceOption, string> = {
+const sinceOptionTitleMap: Record<number, string> = {
     [SinceOption.Today]: "Today",
     [SinceOption.Yesterday]: "Yesterday",
     [SinceOption.LastWeek]: "Last Week",
@@ -31,7 +34,7 @@ const sinceOptionTitleMap: Record<SinceOption, string> = {
     // [SinceOptions.SinceSpecific]: "Since Specific",
 }
 
-const functionMap: Record<SinceOption, () => Moment> = {
+const functionMap: Record<number, () => Moment> = {
     [SinceOption.Today]: moment,
     [SinceOption.Yesterday]: () => moment().subtract(1, 'days'),
     [SinceOption.LastWeek]: () => moment().subtract(1, 'weeks'),
@@ -46,37 +49,74 @@ export function getSinceMoment(option: SinceOption): Date {
 
 export default function SincePicker(props: SincePickerProps): JSX.Element {
     const currentSinceOption = props?.currentSinceOption || SinceOption.Today;
-    const { updateSinceOption } = props;
+    const updateSinceOption = props?.updateSinceOption || (() => { });
 
     const [isOpen, updateIsOpen] = React.useState(false);
+    const closeModal = updateIsOpen.bind(null, false);
+
+    const highlightClassname = " w-[80%] py-1 my-2 flex-0 items-center justify-center rounded-lg ";
+    const textClassname = " text-lg ";
 
     const preButton = (
-        <NWButton
-            title={sinceOptionTitleMap[currentSinceOption]}
-            onPress={() => updateIsOpen(true)}
-        />
-    )
+        <NWView
+            className=" flex-0 flex-col items-center w-screen "
+        >
+            <NWTouchableHighlight
+                className={highlightClassname + " bg-[#C678A699] "}
+                onPress={() => updateIsOpen(true)}
+            >
+                <NWText
+                    className={textClassname}
+                >
+                    {sinceOptionTitleMap[currentSinceOption]}
+                </NWText>
+            </NWTouchableHighlight>
+        </NWView>
+    );
 
     if (!isOpen) {
         return preButton;
     }
 
     const updateAndClose = (val: SinceOption) => {
-        updateIsOpen(false);
+        closeModal();
         updateSinceOption(val);
     }
 
     return (
         <>
             {preButton}
-            <NWModal>
-                {(getEnumValues(SinceOption) as Array<SinceOption>).map(
-                    (sinceOption, index) => <NWButton
-                        key={index}
-                        title={sinceOptionTitleMap[sinceOption]}
-                        onPress={() => updateAndClose(sinceOption)}
-                    />
-                )}
+            <NWModal
+                animationType='slide'
+                transparent={true}
+                onDismiss={closeModal}
+                onRequestClose={closeModal}
+            >
+                <NWView
+                    className=" flex-0 flex-col items-center mt-[13%] "
+                >
+                    <NWView
+                        className={
+                            " w-[90%] flex-0 flex-col items-center justify-between " +
+                            " bg-[#a9a9a930] rounded-lg py-2 "
+                        }
+                    >
+                        {(getEnumValues(SinceOption) as Array<SinceOption>).map(
+                            (sinceOption, index) =>
+                                <NWTouchableHighlight
+                                    className={highlightClassname + " bg-[#C678A6FF] "}
+                                    key={index}
+                                    onPress={() => updateAndClose(sinceOption)}
+                                >
+                                    <NWText
+                                        className={textClassname}
+                                    >
+                                        {sinceOptionTitleMap[sinceOption]}
+                                    </NWText>
+                                </NWTouchableHighlight>
+                        )}
+                    </NWView>
+                </NWView>
             </NWModal>
         </>
     )

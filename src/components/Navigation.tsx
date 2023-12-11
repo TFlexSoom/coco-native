@@ -51,7 +51,6 @@ function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
 
     return (
         <NWModal
-            className=" bg-[#000000FF] "
             animationType='slide'
             transparent={true}
             onDismiss={closeDrawer}

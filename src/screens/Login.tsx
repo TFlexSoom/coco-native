@@ -82,9 +82,7 @@ function LoginForm(): JSX.Element {
                     </NWView>
                 )}
             </Formik>
-            <NWView className=' w-[40%] mb-5 '>
-                <ThirdPartyLogins onPress={makeLoginRequest.bind(null, navigator)} />
-            </NWView>
+            <ThirdPartyLogins onPress={makeLoginRequest.bind(null, navigator)} />
             <NWView className=' flex-0 items-center '>
                 <Terms />
                 <PrivacyPolicy />
