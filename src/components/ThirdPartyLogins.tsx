@@ -14,7 +14,6 @@ import NWView from '../primitives/NWView';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 import { NavigatorContext } from './Navigation';
 import NavigatorTerms from '../constants/NavigatorTerms';
-import NWImage from '../primitives/NWImage';
 
 enum ThirdParty {
     Google = 1,

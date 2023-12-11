@@ -3,7 +3,8 @@
  */
 
 import React from 'react';
-import { Alert, TouchableHighlight } from 'react-native';
+import { Alert } from 'react-native';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import NWModal from '../primitives/NWModal';
 import NWView from '../primitives/NWView';
 import NWText from '../primitives/NWText';
@@ -57,16 +58,26 @@ function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
             onRequestClose={closeDrawer}
 
         >
-            <NWView className=" bg-[#000000FF] ">
-                <TouchableHighlight onPress={closeDrawer}>
-                    <NWText>Username</NWText>
-                </TouchableHighlight>
+            <NWView className=" bg-[#000000FF] h-screen w-[55%] p-2 ">
+                <NWTouchableHighlight
+                    className=" border-2 border-[#FFFFFFFF] rounded-md p-1 w-[36] "
+                    onPress={closeDrawer}
+                >
+                    <MaterialIcon name="close" size={24} color="white" />
+                </NWTouchableHighlight>
                 {Object.keys(drawerContent).map((key, index) => (
-                    <TouchableHighlight key={index} onPress={updateScreen.bind(null, key)}>
-                        <NWText>
-                            {key}
-                        </NWText>
-                    </TouchableHighlight>
+                    <NWTouchableHighlight
+                        className=" bg-[#A9A9A9FF] rounded-lg p-1 w-[80%] my-1 "
+                        key={index}
+                        onPress={updateScreen.bind(null, key)}
+                    >
+                        <NWView className=" pl-1 flex-0 flex-row items-center justify-begin ">
+                            {drawerContent[key].icon}
+                            <NWText>
+                                {key}
+                            </NWText>
+                        </NWView>
+                    </NWTouchableHighlight>
                 ))}
             </NWView>
         </NWModal>

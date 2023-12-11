@@ -13,10 +13,10 @@ import NWView from '../primitives/NWView';
 
 export interface SincePickerProps {
     currentSinceOption?: SinceOption
-    updateSinceOption: (since: number) => void,
+    updateSinceOption?: (since: number) => void,
 }
 
-enum SinceOption {
+export enum SinceOption {
     Today = 1,
     Yesterday = 2,
     LastWeek = 3,
@@ -59,7 +59,7 @@ export default function SincePicker(props: SincePickerProps): JSX.Element {
 
     const preButton = (
         <NWView
-            className=" flex-0 flex-col items-center w-screen "
+            className=" absolute top-0 flex-0 flex-col items-center w-screen "
         >
             <NWTouchableHighlight
                 className={highlightClassname + " bg-[#C678A699] "}
