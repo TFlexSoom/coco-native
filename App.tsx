@@ -27,7 +27,7 @@ const screens: Record<string, Screen> = {
     [NavigatorTerms.LOGIN]: { component: Login, hideDrawer: true, hideTabs: true },
     [NavigatorTerms.DUO]: { component: Duo, hideDrawer: true, hideTabs: true },
     [NavigatorTerms.COMING_SOON]: { component: ComingSoon },
-    [NavigatorTerms.HOME]: { component: Home },
+    [NavigatorTerms.HOME]: { component: Home, },
     [NavigatorTerms.PROFILE]: { component: Profile },
     [NavigatorTerms.SETTINGS]: { component: Settings },
     [NavigatorTerms.FEEDBACK]: { component: Feedback },
@@ -53,6 +53,7 @@ const tabContent: Record<string, TabContent> = {
 }
 
 export default function App(): JSX.Element {
+
     return (
         <Navigation
             initialScreen={NavigatorTerms.LOGIN}

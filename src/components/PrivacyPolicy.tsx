@@ -15,7 +15,7 @@ import Config from './Config';
 
 export default function PrivacyPolicy(): JSX.Element {
     return (
-        <Link to={Config.termsOfService}>
+        <Link to={Config.privacyPolicy}>
             <Text>Privacy Policy</Text>
         </Link>
     )

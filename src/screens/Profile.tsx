@@ -20,6 +20,7 @@ import {
 import NavigatorTerms from '../constants/NavigatorTerms';
 import { NavigatorContext, ScreenNavigator, ScreenProps } from '../components/Navigation';
 import TopBar from '../components/TopBar';
+import NWTextInput from '../primitives/NWTextInput';
 
 interface ChangeProfileRequest {
     username?: string,
@@ -58,20 +59,24 @@ export default function Profile(): JSX.Element {
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
-                        <TextInput
+                        <NWTextInput
+                            className=" border-2 rounded-lg p-2 mt-2 "
                             onChangeText={handleChange('username')}
                             onBlur={handleBlur('username')}
                             value={values.username}
+                            placeholder='Username'
                         />
-                        <TextInput
+                        <NWTextInput
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
-                            value={values.username}
+                            value={values.password}
+                            placeholder='Password'
                         />
-                        <TextInput
+                        <NWTextInput
                             onChangeText={handleChange('duo')}
                             onBlur={handleBlur('duo')}
                             value={values.duo}
+                            placeholder='Confirm Password'
                         />
                         <Button
                             onPress={
