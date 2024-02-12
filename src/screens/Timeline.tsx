@@ -133,12 +133,23 @@ export default function Timeline(): JSX.Element {
                     keyExtractor={(item, index) => String(item.id)}
                     renderItem={({ item }: { item: TimelineMeal }) =>
                         <NWView
-                            className=" flex-0 flex-row bg-[#A62A72BB] mt-4 justify-between ml-8 py-2 "
+                            className=" flex-0 flex-row justify-between bg-[#A62A72BB] mt-4 ml-8 py-2 "
                         >
-                            <NWImage source={{ uri: item.image }} />
-                            <NWText>{item.calories + " Calories"}</NWText>
-                            <NWText>{item.mealType}</NWText>
-                            <NWText>{item.mealTime.toUTCString()}</NWText>
+                            <NWImage
+                                className=" ml-4 " width={50} source={{ uri: item.image }}
+                            />
+                            <NWView
+                                className=" ml-4 flex-1 flex-col py-2 "
+                            >
+                                <NWText>{item.mealType}</NWText>
+                                <NWText>{item.calories + " Calories"}</NWText>
+
+                            </NWView>
+                            <NWView
+                                className=" flex-1 flex-col py-2 "
+                            >
+                                <NWText>{item.mealTime.toUTCString()}</NWText>
+                            </NWView>
                         </NWView>
                     }
                 />

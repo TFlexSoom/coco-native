@@ -98,7 +98,7 @@ export default function SincePicker(props: SincePickerProps): JSX.Element {
                     <NWView
                         className={
                             " w-[90%] flex-0 flex-col items-center justify-between " +
-                            " bg-[#a9a9a930] rounded-lg py-2 "
+                            " bg-[#a9a9a9BB] rounded-lg py-2 "
                         }
                     >
                         {(getEnumValues(SinceOption) as Array<SinceOption>).map(
