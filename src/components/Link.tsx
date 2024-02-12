@@ -3,11 +3,13 @@
  */
 
 import React from 'react';
-import { Alert, Linking, TouchableHighlight } from 'react-native';
+import { Alert, Linking } from 'react-native';
+import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 
 export interface LinkProps {
     to: string
     children: JSX.Element
+    className?: string
 }
 
 // Copied from https://reactnative.dev/docs/linking
@@ -24,15 +26,16 @@ async function onPress(url: string) {
     }
 }
 
-export default function Link({ to, children }: LinkProps): JSX.Element {
+export default function Link({ to, children, className }: LinkProps): JSX.Element {
 
     const onPressHandler = React.useCallback(onPress.bind(null, to), [to]);
 
     return (
-        <TouchableHighlight
+        <NWTouchableHighlight
+            className={className || ""}
             onPress={onPressHandler}
         >
             {children}
-        </TouchableHighlight>
+        </NWTouchableHighlight>
     )
 }

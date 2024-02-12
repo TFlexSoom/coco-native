@@ -4,15 +4,16 @@
 
 import React from 'react';
 import {
-    Button,
     GestureResponderEvent,
-    TextInput,
-    View,
 } from 'react-native';
 import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
 import TopBar from '../components/TopBar';
 import NavigatorTerms from '../constants/NavigatorTerms';
 import { Formik } from 'formik';
+import NWView from '../primitives/NWView';
+import NWText from '../primitives/NWText';
+import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
+import NWTextInput from '../primitives/NWTextInput';
 
 interface Feedback {
     text: string,
@@ -37,23 +38,33 @@ export default function Feedback(): JSX.Element {
                 onSubmit={submitFeedback.bind(null, navigator)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
-                    <View>
-                        <TextInput
+                    <NWView className=" p-5 ">
+                        <NWText className=" text-xl color-[#000000FF] ">Feedback</NWText>
+                        <NWTextInput
+                            className=" border-2 rounded-lg p-2 min-h-[40%] "
                             onChangeText={handleChange('text')}
                             onBlur={handleBlur('text')}
                             value={values.text}
+                            multiline={true}
                         />
-                        <Button
-                            onPress={
-                                handleSubmit as (values:
+                        <NWView className=" pt-2 ">
+                            <NWTouchableHighlight
+                                className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
+                                onPress={handleSubmit as (values:
                                     GestureResponderEvent |
                                     React.FormEvent<HTMLFormElement> |
                                     undefined) => void
-                            }
-                            title="Submit Changes"
-                        />
+                                }
+                            >
+                                <NWText
+                                    className=' text-[#FFFFFFFF] font-medium text-lg '
+                                >
+                                    Submit Feedback
+                                </NWText>
+                            </NWTouchableHighlight>
+                        </NWView>
 
-                    </View>
+                    </NWView>
                 )}
             </Formik>
         </>

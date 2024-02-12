@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { Alert } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import NWModal from '../primitives/NWModal';
 import NWView from '../primitives/NWView';
@@ -95,6 +95,17 @@ interface NavigationTabProps {
 
 function NavigationTab(props: NavigationTabProps): JSX.Element {
     const { tabContent, updateScreen } = props;
+
+    const [keyboardIsVisible, updateKeyboardIsVisible] = React.useState(false);
+
+    Keyboard.addListener('keyboardWillShow', updateKeyboardIsVisible.bind(null, true));
+    Keyboard.addListener('keyboardWillHide', updateKeyboardIsVisible.bind(null, false));
+    Keyboard.addListener('keyboardDidShow', updateKeyboardIsVisible.bind(null, true));
+    Keyboard.addListener('keyboardDidHide', updateKeyboardIsVisible.bind(null, false));
+
+    if (keyboardIsVisible) {
+        return <></>
+    }
 
     return (
         <>

@@ -92,7 +92,7 @@ export default function Trends(): JSX.Element {
             >
                 <SincePicker currentSinceOption={sinceOption} updateSinceOption={updateSinceOption} />
                 <NWView
-                    className=" flex-0 flex-col h-[90%] pt-16 "
+                    className=" flex-0 flex-col pt-16 "
                 >
                     <ScrollView
                         contentInsetAdjustmentBehavior="automatic">
