@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import NavigatorTerms from '../constants/NavigatorTerms';
-import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
+import { NavigatorContext, ScreenNavigator } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 import NWTextInput from '../primitives/NWTextInput';
 import NWText from '../primitives/NWText';

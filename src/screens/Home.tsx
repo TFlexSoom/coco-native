@@ -6,7 +6,7 @@
 import React from 'react';
 import TopBar from '../components/TopBar';
 import Config from '../components/Config';
-import { NavigatorContext } from '../components/Navigation';
+import { NavigatorContext } from '../contexts/Navigation';
 import NWSafeAreaView from '../primitives/NWSafeAreaView';
 import NWView from '../primitives/NWView';
 import NWText from '../primitives/NWText';

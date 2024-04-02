@@ -20,7 +20,9 @@ import Settings from './src/screens/Settings';
 import Timeline from './src/screens/Timeline';
 import Trends from './src/screens/Trends';
 import NavigatorTerms from './src/constants/NavigatorTerms';
-import Navigation, { DrawerContent, Screen, TabContent } from './src/components/Navigation';
+import Navigation, { DrawerContent, Screen, TabContent } from './src/contexts/Navigation';
+import NetworkProvider from './src/contexts/Network';
+import AuthenticationProvider from './src/contexts/Authentication';
 
 
 const screens: Record<string, Screen> = {
@@ -55,11 +57,16 @@ const tabContent: Record<string, TabContent> = {
 export default function App(): JSX.Element {
 
     return (
-        <Navigation
-            initialScreen={NavigatorTerms.LOGIN}
-            drawerContent={drawerContent}
-            tabContent={tabContent}
-            screens={screens}
-        />
+        <NetworkProvider>
+            <AuthenticationProvider>
+                <Navigation
+                    initialScreen={NavigatorTerms.LOGIN}
+                    drawerContent={drawerContent}
+                    tabContent={tabContent}
+                    screens={screens}
+                />
+            </AuthenticationProvider>
+        </NetworkProvider>
+
     );
 }

@@ -8,7 +8,7 @@ import {
     SafeAreaView,
     Image,
 } from 'react-native';
-import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
+import { NavigatorContext, ScreenNavigator } from '../contexts/Navigation';
 import NavigatorTerms from '../constants/NavigatorTerms';
 
 function duoAuthenticate(navigator: ScreenNavigator) {

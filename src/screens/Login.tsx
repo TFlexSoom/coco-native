@@ -17,7 +17,7 @@ import Terms from '../components/Terms';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import ThirdPartyLogins from '../components/ThirdPartyLogins';
 import NavigatorTerms from '../constants/NavigatorTerms';
-import { NavigatorContext, ScreenNavigator, ScreenProps } from '../components/Navigation';
+import { NavigatorContext, ScreenNavigator, ScreenProps } from '../contexts/Navigation';
 import NWSafeAreaView from '../primitives/NWSafeAreaView';
 import NWView from '../primitives/NWView';
 import NWTextInput from '../primitives/NWTextInput';

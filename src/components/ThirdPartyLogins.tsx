@@ -12,7 +12,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import { getEnumValues } from '../helpers/Enum';
 import NWView from '../primitives/NWView';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
-import { NavigatorContext } from './Navigation';
+import { NavigatorContext } from '../contexts/Navigation';
 import NavigatorTerms from '../constants/NavigatorTerms';
 
 enum ThirdParty {

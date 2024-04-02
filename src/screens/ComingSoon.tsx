@@ -10,7 +10,7 @@ import {
     StatusBar,
     Text,
 } from 'react-native';
-import { NavigatorContext } from '../components/Navigation';
+import { NavigatorContext } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 
 export default function ComingSoon(): JSX.Element {

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { NavigatorContext } from '../components/Navigation';
+import { NavigatorContext } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 import SincePicker, { SinceOption } from '../components/SincePicker';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';

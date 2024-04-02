@@ -6,7 +6,7 @@ import React from 'react';
 import {
     GestureResponderEvent,
 } from 'react-native';
-import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
+import { NavigatorContext, ScreenNavigator } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 import NavigatorTerms from '../constants/NavigatorTerms';
 import { Formik } from 'formik';

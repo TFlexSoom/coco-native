@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import NavigatorTerms from '../constants/NavigatorTerms';
-import { NavigatorContext, ScreenNavigator } from '../components/Navigation';
+import { NavigatorContext, ScreenNavigator } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 import NWView from '../primitives/NWView';
 import NWText from '../primitives/NWText';

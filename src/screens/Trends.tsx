@@ -9,7 +9,7 @@ import {
     StatusBar,
 } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
-import { NavigatorContext } from '../components/Navigation';
+import { NavigatorContext } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 import SincePicker, { SinceOption } from '../components/SincePicker';
 import NWView from '../primitives/NWView';

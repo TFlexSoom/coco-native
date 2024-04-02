@@ -8,7 +8,7 @@ import {
     ScrollView,
     StatusBar,
 } from 'react-native';
-import { NavigatorContext } from '../components/Navigation';
+import { NavigatorContext } from '../contexts/Navigation';
 import TopBar from '../components/TopBar';
 import Link from '../components/Link';
 import NWView from '../primitives/NWView';
