@@ -37,9 +37,9 @@ const habits = [
 function TrendTotals({ totals, className }: { totals: Array<TrendStat>, className?: string }): JSX.Element {
     return (
         <NWView className={className || ""}>
-            {totals.map(({ title, value }) => {
+            {totals.map(({ title, value }, index) => {
                 return (
-                    <NWView className=" pb-2 ">
+                    <NWView className=" pb-2 " key={index}>
                         <NWView className=" flex-0 flex-row justify-between bg-[#A62A72BB] p-2 ">
                             <NWText className=" color-[#000000FF] "> {title} </NWText>
                             <NWText className=" text-l ">{value}</NWText>
@@ -107,7 +107,7 @@ export default function Trends(): JSX.Element {
                         </NWView>
                         <NWView className="pb-5">
                             <NWText className=" text-xl ">Healthy Habits</NWText>
-                            {habits.map((habit) => <NWText className=" mb-2 p-1 bg-[#A62A72BB] text-m color-[#000000FF] ">{habit}</NWText>)}
+                            {habits.map((habit, index) => <NWText className=" mb-2 p-1 bg-[#A62A72BB] text-m color-[#000000FF] " key={index}>{habit}</NWText>)}
                         </NWView>
                     </ScrollView>
                 </NWView>

@@ -19,7 +19,7 @@ export interface TopBarProps {
 
 export default function TopBar({ onButtonPress }: TopBarProps): JSX.Element {
     return (
-        <NWView className=" flex flex-row bg-[#000000FF] items-center ">
+        <NWView className=" flex flex-row bg-[#000000] items-center ">
             <NWTouchableHighlight
                 className={
                     " flex flex-col ml-4 mr-7 my-2 items-center justify-center " +
@@ -29,7 +29,7 @@ export default function TopBar({ onButtonPress }: TopBarProps): JSX.Element {
             >
                 <MaterialIcon name="person" size={20} color="black" />
             </NWTouchableHighlight>
-            <NWText className="text-2xl ">
+            <NWText className=" text-2xl text-[#FFFFFF] ">
                 {Config.appTitle}
             </NWText>
         </NWView >

@@ -3,12 +3,15 @@
  */
 
 import React from 'react';
-import { Alert, Keyboard } from 'react-native';
+import { Alert, Keyboard, Dimensions } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import NWModal from '../primitives/NWModal';
 import NWView from '../primitives/NWView';
 import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
+
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
 export interface ScreenNavigator {
     navigate: (screenName: string) => void
@@ -52,13 +55,42 @@ function NavigationDrawer(props: NavigationDrawerProps): JSX.Element {
 
     return (
         <NWModal
-            animationType='slide'
-            transparent={true}
-            onDismiss={closeDrawer}
-            onRequestClose={closeDrawer}
-
+            className=' p-0 m-0 flex-1 '
+            animationIn='slideInLeft'
+            animationOut='slideOutLeft'
+            isVisible={isOut}
+            onBackdropPress={closeDrawer}
+            hasBackdrop={false}
+            swipeDirection='left'
+            deviceHeight={deviceHeight}
+            deviceWidth={deviceWidth}
+            animationInTiming={500} // ms
+            animationOutTiming={500} // ms
+            avoidKeyboard={false}
+            coverScreen={false}
+            backdropColor={''}
+            backdropOpacity={0}
+            backdropTransitionInTiming={0}
+            backdropTransitionOutTiming={0}
+            customBackdrop={undefined}
+            useNativeDriver={false}
+            hideModalContentWhileAnimating={false}
+            propagateSwipe={false}
+            panResponderThreshold={0}
+            swipeThreshold={0}
+            onModalShow={() => { }}
+            onModalWillShow={() => { }}
+            onModalHide={() => { }}
+            onModalWillHide={() => { }}
+            onBackButtonPress={() => { }}
+            scrollTo={null}
+            scrollOffset={0}
+            scrollOffsetMax={0}
+            scrollHorizontal={false}
+            statusBarTranslucent={false}
+            supportedOrientations={[]}
         >
-            <NWView className=" bg-[#000000FF] h-screen w-[55%] p-2 ">
+            <NWView className=" bg-[#000000FF] h-screen w-[55%] p-4 ">
                 <NWTouchableHighlight
                     className=" border-2 border-[#FFFFFFFF] rounded-md p-1 w-[36] "
                     onPress={closeDrawer}
