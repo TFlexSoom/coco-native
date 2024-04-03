@@ -15,6 +15,7 @@ import Duo from './src/screens/Duo';
 import Feedback from './src/screens/Feedback';
 import Home from './src/screens/Home';
 import Login from './src/screens/Login';
+import SignUp from './src/screens/Signup';
 import Profile from './src/screens/Profile';
 import Settings from './src/screens/Settings';
 import Timeline from './src/screens/Timeline';
@@ -27,6 +28,7 @@ import AuthenticationProvider from './src/contexts/Authentication';
 
 const screens: Record<string, Screen> = {
     [NavigatorTerms.LOGIN]: { component: Login, hideDrawer: true, hideTabs: true },
+    [NavigatorTerms.SIGN_UP]: { component: SignUp, hideDrawer: true, hideTabs: true },
     [NavigatorTerms.DUO]: { component: Duo, hideDrawer: true, hideTabs: true },
     [NavigatorTerms.COMING_SOON]: { component: ComingSoon },
     [NavigatorTerms.HOME]: { component: Home, },

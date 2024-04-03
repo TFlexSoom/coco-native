@@ -15,8 +15,6 @@ import {
 import Logo from '../components/Logo';
 import Terms from '../components/Terms';
 import PrivacyPolicy from '../components/PrivacyPolicy';
-import ThirdPartyLogins from '../components/ThirdPartyLogins';
-import NavigatorTerms from '../constants/NavigatorTerms';
 import { NavigatorContext, ScreenNavigator, ScreenProps } from '../contexts/Navigation';
 import NWSafeAreaView from '../primitives/NWSafeAreaView';
 import NWView from '../primitives/NWView';
@@ -24,16 +22,17 @@ import NWTextInput from '../primitives/NWTextInput';
 import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 import { AuthenticationContext, Credentials } from '../contexts/Authentication';
+import NavigatorTerms from '../constants/NavigatorTerms';
 
-async function login(
+async function register(
     navigator: ScreenNavigator,
     authentication: AuthenticationContext,
     creds: Credentials
 ): Promise<void> {
-    const result = await authentication.signIn(creds);
+    const result = await authentication.signUp(creds);
 }
 
-function LoginForm(): JSX.Element {
+function RegisterForm(): JSX.Element {
     const navigator = React.useContext(NavigatorContext);
     const authentication = React.useContext(AuthenticationContext);
     const inputClass = ' pl-5 border-2 border-[#d3d3d3] rounded-lg '
@@ -41,13 +40,15 @@ function LoginForm(): JSX.Element {
         <NWView className=' flex-0 flex-col items-center w-min-[100%] '>
             <Formik
                 initialValues={{ email: '', password: '' } as Credentials}
-                onSubmit={login.bind(null, navigator, authentication)}
+                onSubmit={register.bind(null, navigator, authentication)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <NWView
                         className=' px-10 w-[90%] '
                     >
-                        <NWView className=' py-1 '>
+                        <NWView
+                            className=' py-1 '
+                        >
                             <NWTextInput
                                 className={inputClass}
                                 onChangeText={handleChange('email')}
@@ -79,7 +80,7 @@ function LoginForm(): JSX.Element {
                             <NWText
                                 className=' text-[#FFFFFFFF] font-medium text-lg '
                             >
-                                Login
+                                Register
                             </NWText>
                         </NWTouchableHighlight>
 
@@ -91,19 +92,14 @@ function LoginForm(): JSX.Element {
             >
                 <NWTouchableHighlight
                     className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
-                    onPress={() => { navigator.navigate(NavigatorTerms.SIGN_UP) }}
+                    onPress={() => { navigator.navigate(NavigatorTerms.LOGIN) }}
                 >
                     <NWText
                         className=' text-[#FFFFFFFF] font-medium text-lg '
                     >
-                        SignUp
+                        Back To Login
                     </NWText>
                 </NWTouchableHighlight>
-            </NWView>
-            <NWView
-                className=' flex-0 items-center justify-center w-full '
-            >
-                <ThirdPartyLogins onPress={() => { }} />
             </NWView>
             <NWView className=' flex-0 items-center '>
                 <Terms />
@@ -113,13 +109,13 @@ function LoginForm(): JSX.Element {
     );
 }
 
-export default function Login(props: ScreenProps): JSX.Element {
+export default function SignUp(props: ScreenProps): JSX.Element {
     return (
         <NWSafeAreaView>
             <NWView className=' py-16 '>
                 <Logo />
             </NWView>
-            <LoginForm {...props} />
+            <RegisterForm {...props} />
         </NWSafeAreaView>
     )
 }

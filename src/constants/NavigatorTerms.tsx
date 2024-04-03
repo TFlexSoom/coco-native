@@ -1,5 +1,6 @@
 export default {
     LOGIN: "Login",
+    SIGN_UP: "SignUp",
     DUO: "Duo",
     HOME: "Home",
     COMING_SOON: "ComingSoon",

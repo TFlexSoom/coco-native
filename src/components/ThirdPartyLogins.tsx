@@ -52,7 +52,7 @@ function IconButton(props: IconButtonProps): JSX.Element {
 
 export default function ThirdPartyLogins(props: any): JSX.Element {
     return (
-        <NWView className=' flex-0 flex-row items-center justify-between w-[60%] mt-2 mb-6 pr-1 '>
+        <NWView className=' flex-0 flex-row items-center justify-between w-[60%] py-2 pr-1 '>
             {(getEnumValues(ThirdParty)).map(
                 (thirdParty, index) => <IconButton
                     key={index}
