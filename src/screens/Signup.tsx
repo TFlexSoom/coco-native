@@ -23,13 +23,21 @@ import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 import { AuthenticationContext, Credentials } from '../contexts/Authentication';
 import NavigatorTerms from '../constants/NavigatorTerms';
+import { isError } from '../types/result';
 
 async function register(
     navigator: ScreenNavigator,
     authentication: AuthenticationContext,
     creds: Credentials
 ): Promise<void> {
-    const result = await authentication.signUp(creds);
+    try {
+        const result = await authentication.signUp(creds);
+        if (!isError(result)) {
+            navigator.navigate(NavigatorTerms.HOME);
+        }
+    } catch (err) {
+        console.warn(err);
+    }
 }
 
 function RegisterForm(): JSX.Element {
@@ -66,6 +74,7 @@ function RegisterForm(): JSX.Element {
                                 onBlur={handleBlur('password')}
                                 value={values.password}
                                 placeholder=' Password'
+                                secureTextEntry={true}
                             />
                         </NWView>
                         <NWTouchableHighlight

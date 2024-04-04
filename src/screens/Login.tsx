@@ -24,13 +24,22 @@ import NWTextInput from '../primitives/NWTextInput';
 import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 import { AuthenticationContext, Credentials } from '../contexts/Authentication';
+import { isError } from '../types/result';
+import NWScrollView from '../primitives/NWScrollView';
 
 async function login(
     navigator: ScreenNavigator,
     authentication: AuthenticationContext,
     creds: Credentials
 ): Promise<void> {
-    const result = await authentication.signIn(creds);
+    try {
+        const result = await authentication.signIn(creds);
+        if (!isError(result)) {
+            navigator.navigate(NavigatorTerms.HOME);
+        }
+    } catch (err) {
+        console.warn(err);
+    }
 }
 
 function LoginForm(): JSX.Element {
@@ -65,6 +74,7 @@ function LoginForm(): JSX.Element {
                                 onBlur={handleBlur('password')}
                                 value={values.password}
                                 placeholder=' Password'
+                                secureTextEntry={true}
                             />
                         </NWView>
                         <NWTouchableHighlight
@@ -116,10 +126,12 @@ function LoginForm(): JSX.Element {
 export default function Login(props: ScreenProps): JSX.Element {
     return (
         <NWSafeAreaView>
-            <NWView className=' py-16 '>
-                <Logo />
-            </NWView>
-            <LoginForm {...props} />
+            <NWScrollView>
+                <NWView className=' py-16 '>
+                    <Logo />
+                </NWView>
+                <LoginForm {...props} />
+            </NWScrollView>
         </NWSafeAreaView>
     )
 }

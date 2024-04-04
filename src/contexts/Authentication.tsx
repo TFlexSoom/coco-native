@@ -3,12 +3,14 @@
  */
 
 import React from 'react';
-import { FetchArgs, FetchSignature, NetworkContext } from './Network';
+import { FetchArgs, FetchResponse, FetchSignature, NetworkContext, badResponse } from './Network';
 import * as ApiEndpoint from '../constants/ApiEndpoint';
 import { fromEndpointAndParams } from '../helpers/URL';
+import { Result, error, result } from '../types/result';
+import { Buffer } from 'buffer';
 
 export interface User {
-
+    userid: string
 }
 
 export interface Credentials {
@@ -31,19 +33,19 @@ interface AuthenticationState {
 type AuthUpdate = (newState: AuthenticationState) => void
 
 export interface AuthenticationContext extends AuthenticationState {
-    signUp: (args: Credentials) => Promise<void>,
-    signIn: (args: Credentials) => Promise<void>,
-    signOut: () => Promise<void>,
+    signUp: (args: Credentials) => Promise<Result<User>>,
+    signIn: (args: Credentials) => Promise<Result<User>>,
+    signOut: () => Promise<boolean>,
     fetch: FetchSignature,
 }
 
 export const AuthenticationContext = React.createContext({
     user: null,
     token: "",
-    signUp: async (args: Credentials) => { },
-    signIn: async (args: Credentials) => { },
-    signOut: async () => { },
-    fetch: async (args: FetchArgs) => new Response(),
+    signUp: async (args: Credentials) => error("unimplemented"),
+    signIn: async (args: Credentials) => error("unimplemented"),
+    signOut: async () => false,
+    fetch: async (args: FetchArgs) => badResponse(),
 } as AuthenticationContext);
 
 async function signUp(
@@ -51,14 +53,14 @@ async function signUp(
     network: NetworkContext,
     update: AuthUpdate,
     creds: Credentials,
-) {
+): Promise<Result<User>> {
     if (instance.token !== "") {
         throw Error("cannot signup when signed in");
     }
 
     const url = fromEndpointAndParams(ApiEndpoint.register, recordFromCreds(creds));
 
-    const result = await netFetch(instance, network, update, {
+    const netResult: FetchResponse = await netFetch(instance, network, update, {
         resource: url.toString(),
         options: {
             method: "POST",
@@ -72,18 +74,20 @@ async function signUp(
     });
 
     try {
-        if (!result.ok) {
+        if (!netResult.isOk) {
             console.error("bad signup response");
-            return;
+            return error("bad signup response");
         }
 
-        const payload = await result.json();
+        const payload = netResult.data;
         instance.token = payload?.jwt || "";
         instance.user = payload?.record || {};
         update(instance);
     } catch (err) {
         console.error(err);
     }
+
+    return result({} as User)
 }
 
 async function signIn(
@@ -91,19 +95,20 @@ async function signIn(
     network: NetworkContext,
     update: AuthUpdate,
     creds: Credentials
-) {
+): Promise<Result<User>> {
     if (instance.token !== "") {
         throw Error("cannot signin when signed in. Log out first!");
     }
 
-    const url = fromEndpointAndParams(ApiEndpoint.login, recordFromCreds(creds));
+    const auth = Buffer.from(creds.email + ":" + creds.password).toString('base64');
 
-    const result = await netFetch(instance, network, update, {
-        resource: url.toString(),
+    const netResult: FetchResponse = await netFetch(instance, network, update, {
+        resource: ApiEndpoint.login,
         options: {
             method: "POST",
             cache: "no-cache",
             headers: {
+                "Authorization": "Basic " + auth,
                 "Content-Type": "application/json"
             },
             redirect: "follow",
@@ -112,25 +117,31 @@ async function signIn(
     });
 
     try {
-        if (!result?.ok) {
+        if (!netResult.isOk) {
             console.error("bad signin response");
-            return;
+            return error("bad signin response");
         }
 
-        const payload = await result.json();
-        instance.token = payload?.jwt || "";
-        instance.user = payload?.record || {};
+        const payload = netResult.data;
+        instance.token = payload?.token || "";
+        instance.user = {
+            userid: payload?.userid || "",
+        };
         update(instance);
     } catch (err) {
         console.error(err);
     }
+
+    return result({
+        userid: "",
+    } as User)
 }
 
 async function signOut(
     instance: AuthenticationState,
     network: NetworkContext,
     update: AuthUpdate
-) {
+): Promise<boolean> {
     if (instance.token === "") {
         throw Error("already signed out");
     }
@@ -138,6 +149,7 @@ async function signOut(
     instance.token = "";
     instance.user = null;
     update(instance);
+    return true;
 }
 
 async function netFetch(
@@ -145,7 +157,7 @@ async function netFetch(
     network: NetworkContext,
     update: AuthUpdate,
     args: FetchArgs
-) {
+): Promise<FetchResponse> {
     if (instance.token === "") {
         return await network.fetch(args);
     }
