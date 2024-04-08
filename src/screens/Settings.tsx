@@ -13,6 +13,7 @@ import TopBar from '../components/TopBar';
 import NWView from '../primitives/NWView';
 import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
+import { AuthenticationContext } from '../contexts/Authentication';
 
 interface ChangeProfileRequest {
     username?: string,
@@ -55,8 +56,14 @@ const settings: Array<Setting> = [
     }
 ]
 
+async function signOut(auth: AuthenticationContext, navigator: ScreenNavigator): Promise<void> {
+    await auth.signOut();
+    navigator.navigate(NavigatorTerms.LOGIN);
+}
+
 export default function Settings(): JSX.Element {
     const navigator = React.useContext(NavigatorContext);
+    const auth = React.useContext(AuthenticationContext);
 
     return (
         <>
@@ -73,7 +80,7 @@ export default function Settings(): JSX.Element {
             <NWView className=" pt-2 ">
                 <NWTouchableHighlight
                     className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
-                    onPress={() => navigator.navigate(NavigatorTerms.LOGIN)}
+                    onPress={() => signOut(auth, navigator)}
                 >
                     <NWText
                         className=' text-[#FFFFFFFF] font-medium text-lg '
@@ -85,7 +92,7 @@ export default function Settings(): JSX.Element {
             <NWView className=" pt-2 ">
                 <NWTouchableHighlight
                     className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
-                    onPress={() => navigator.navigate(NavigatorTerms.LOGIN)}
+                    onPress={() => signOut(auth, navigator)}
                 >
                     <NWText
                         className=' text-[#FFFFFFFF] font-medium text-lg '

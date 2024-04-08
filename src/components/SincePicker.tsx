@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Dimensions } from 'react-native'
 import NWModal from '../primitives/NWModal';
 import NWButton from '../primitives/NWButton';
 import { getEnumValues } from '../helpers/Enum';
@@ -10,6 +11,9 @@ import moment, { Moment } from 'moment';
 import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 import NWView from '../primitives/NWView';
+
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
 export interface SincePickerProps {
     currentSinceOption?: SinceOption
@@ -87,10 +91,39 @@ export default function SincePicker(props: SincePickerProps): JSX.Element {
         <>
             {preButton}
             <NWModal
-                animationType='slide'
-                transparent={true}
-                onDismiss={closeModal}
-                onRequestClose={closeModal}
+                animationIn='slideInUp'
+                animationOut='slideOutUp'
+                isVisible={isOpen}
+                onBackdropPress={closeModal}
+                hasBackdrop={false}
+                swipeDirection='left'
+                deviceHeight={deviceHeight}
+                deviceWidth={deviceWidth}
+                animationInTiming={500} // ms
+                animationOutTiming={500} // ms
+                avoidKeyboard={false}
+                coverScreen={false}
+                backdropColor={''}
+                backdropOpacity={0}
+                backdropTransitionInTiming={0}
+                backdropTransitionOutTiming={0}
+                customBackdrop={undefined}
+                useNativeDriver={false}
+                hideModalContentWhileAnimating={false}
+                propagateSwipe={false}
+                panResponderThreshold={0}
+                swipeThreshold={0}
+                onModalShow={() => { }}
+                onModalWillShow={() => { }}
+                onModalHide={closeModal}
+                onModalWillHide={closeModal}
+                onBackButtonPress={() => { }}
+                scrollTo={null}
+                scrollOffset={0}
+                scrollOffsetMax={0}
+                scrollHorizontal={false}
+                statusBarTranslucent={false}
+                supportedOrientations={[]}
             >
                 <NWView
                     className=" flex-0 flex-col items-center mt-[13%] "

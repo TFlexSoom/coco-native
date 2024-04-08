@@ -21,6 +21,7 @@ import NWText from '../primitives/NWText';
 import NWTouchableHighlight from '../primitives/NWTouchableHighlight';
 import NWView from '../primitives/NWView';
 import NWButton from '../primitives/NWButton';
+import { AuthenticationContext } from '../contexts/Authentication';
 
 interface ChangeProfileRequest {
     username?: string,
@@ -39,8 +40,14 @@ function changePhoto(photo: string): void {
     /** TODO **/
 }
 
+async function signOut(auth: AuthenticationContext, navigator: ScreenNavigator): Promise<void> {
+    await auth.signOut();
+    navigator.navigate(NavigatorTerms.LOGIN);
+}
+
 export default function Profile(): JSX.Element {
     const navigator = React.useContext(NavigatorContext);
+    const auth = React.useContext(AuthenticationContext);
 
     const image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==';
     const username = "";
@@ -120,7 +127,7 @@ export default function Profile(): JSX.Element {
                     <NWView className=" py-2 ">
                         <NWTouchableHighlight
                             className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
-                            onPress={() => { navigator.navigate(NavigatorTerms.LOGIN) }}
+                            onPress={() => signOut(auth, navigator)}
                         >
                             <NWText
                                 className=' text-[#FFFFFFFF] font-medium text-lg '
@@ -132,7 +139,7 @@ export default function Profile(): JSX.Element {
                     <NWView>
                         <NWTouchableHighlight
                             className=' flex-0 items-center justify-center bg-[#C678A6] py-1 rounded-lg '
-                            onPress={() => { navigator.navigate(NavigatorTerms.LOGIN) }}
+                            onPress={() => signOut(auth, navigator)}
                         >
                             <NWText
                                 className=' text-[#FFFFFFFF] font-medium text-lg '
