@@ -72,8 +72,8 @@ export default function Discover(): JSX.Element {
                     contentInsetAdjustmentBehavior="automatic">
                     <NWText className=" text-xl color-[#000000FF] pb-5 ">Headlines</NWText>
                     {headlines.map(({ title, link }, index) =>
-                        <NWView className=" pb-5 ">
-                            <NWView className=" bg-[#C678A699] p-3 " key={index} >
+                        <NWView className=" pb-5 " key={index}>
+                            <NWView className=" bg-[#C678A699] p-3 " >
                                 <Link className="" to={link}>
                                     <NWText className=" color-[#000000FF] ">
                                         {title}
@@ -86,8 +86,8 @@ export default function Discover(): JSX.Element {
                     <NWText className=" text-xl color-[#000000FF] pt-10 pb-5 ">Diets</NWText>
                     <NWView className=" pl-5 flex-1 flex-col flex-wrap max-h-[200px] ">
                         {diets.map(({ title }, index) =>
-                            <NWView className=" pb-5 pr-2 ">
-                                <NWView className=" bg-[#C678A699] p-3 " key={index} >
+                            <NWView className=" pb-5 pr-2 " key={index}>
+                                <NWView className=" bg-[#C678A699] p-3 ">
                                     <NWText className=" color-[#000000FF] ">
                                         {title}
                                     </NWText>
